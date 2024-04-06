@@ -1,4 +1,4 @@
 import React from 'react';
 
-const GaragePage = React.lazy(() => import('./ui/GaragePage.tsx'));
+const GaragePage = React.lazy(() => import('./ui/GaragePage'));
 export default GaragePage;
