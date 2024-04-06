@@ -5,6 +5,13 @@ module.exports = {
   ignorePatterns: ['dist', 'node_modules', 'vit-env.d.ts', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh'],
+  settings: {
+    'import/resolver': {
+      node: {
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
+      },
+    },
+  },
   rules: {
     'max-lines-per-function': ['error', 40],
     'no-magic-numbers': [
@@ -18,5 +25,11 @@ module.exports = {
     ],
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
+    'import/extensions': ['error', 'ignorePackages', {
+      js: 'never',
+      jsx: 'never',
+      ts: 'never',
+      tsx: 'never',
+    }],
   },
 };
