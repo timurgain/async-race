@@ -10,6 +10,7 @@ The project is about drag-racing competition to discover which car is the fastes
 - React 18;
 - HTML5, SCSS;
 - Vite.js
+- React-Aria
 - ...
 
 ## Links

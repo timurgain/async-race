@@ -1,6 +1,11 @@
 import React from 'react';
 import styles from './WinnersPage.module.scss';
+import { Header } from '@/widgets/Header';
 
 export default function WinnersPage(): React.ReactNode {
-  return <h1 className={styles.h1}>WinnersPage</h1>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }

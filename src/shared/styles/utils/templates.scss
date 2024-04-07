@@ -1,6 +1,27 @@
+// FLEX
+
 %flex-col-start-center {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+}
+
+%flex-col-start-start {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+// EFFECTS
+
+%transition-initial {
+  opacity: 1;
+  transition: opacity 0.2s linear;
+}
+
+%transition-hover {
+  opacity: 0.7;
+  cursor: pointer;
 }

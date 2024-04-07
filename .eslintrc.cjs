@@ -4,7 +4,7 @@ module.exports = {
   extends: ['airbnb', 'airbnb/hooks', 'plugin:prettier/recommended'],
   ignorePatterns: ['dist', 'node_modules', 'vit-env.d.ts', '.eslintrc.cjs', 'vite.config.ts'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
+  plugins: ['react-refresh', "plugin:react/jsx-runtime"],
   settings: {
     'import/resolver': {
       typescript: {},

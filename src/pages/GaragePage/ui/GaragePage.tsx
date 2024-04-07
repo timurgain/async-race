@@ -1,11 +1,11 @@
 import React from 'react';
-import { PageLayout } from '@/widgets/PageLayout';
 import styles from './GaragePage.module.scss';
+import { Header } from '@/widgets/Header';
 
 export default function GaragePage(): React.ReactNode {
   return (
-    <PageLayout>
-      <div className={styles.garage}>Garage</div>
-    </PageLayout>
+    <>
+      <Header />
+    </>
   );
 }

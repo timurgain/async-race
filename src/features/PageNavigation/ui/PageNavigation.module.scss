@@ -1,0 +1,38 @@
+@import '@/shared/styles/index.scss';
+
+.nav {
+  margin: auto 0;
+  @include set-block-size(auto, auto);
+  &__list {
+    width: auto;
+    @extend %flex-col-start-start;
+    row-gap: 20px;
+  }
+}
+
+.link {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  color: $white-252;
+  @include set-block-size(100px, 45px);
+  padding: 10px 15px;
+  background: transparent;
+  border-radius: 8px;
+  color: $purble-249;
+  border: 2px solid $purble-249;
+  cursor: pointer;
+  @extend %transition-initial;
+
+  &:hover {
+    @extend %transition-hover;
+  }
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &_active {
+    color: $purple-153;
+    border: 2px solid $purple-153;
+  }
+}
