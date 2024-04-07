@@ -22,8 +22,8 @@
 .link {
   @extend %flex-row-center-center;
   @extend %transition-initial;
-  @include set-block-size(110px, 50px);
-  @include set-font-size(16px, 1.6, 600);
+  @include set-block-size(130px, 50px);
+  @include set-font-size(22px, 1.6, 600);
   text-decoration: none;
   color: $white-252;
   padding: 10px 15px;

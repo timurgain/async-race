@@ -1,0 +1,40 @@
+@import '@/shared/styles/index.scss';
+
+.button {
+  @extend %flex-row-center-center;
+  @extend %transition-initial;
+  cursor: pointer;
+
+  &[data-hovered] {
+    @extend %transition-hover;
+  }
+
+  &[data-focus-visible] {
+    border-width: 3px;
+  }
+
+  &[data-disabled] {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &_kit_primary-m-green,
+  &_kit_primary-m-purple {
+    @include set-font-size(16px, 1.2, 600);
+    @include set-block-size(auto, auto);
+    border-radius: 6px;
+    padding: 6px 12px;
+    gap: 10px;
+    background: transparent;
+  }
+
+  &_kit_primary-m-green {
+    color: $green-155;
+    border: 2px solid $green-155;
+  }
+
+  &_kit_primary-m-purple {
+    color: $purple-249;
+    border: 2px solid $purple-249;
+  }
+}

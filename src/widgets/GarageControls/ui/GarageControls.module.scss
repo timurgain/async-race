@@ -1,0 +1,7 @@
+@import '@/shared/styles/index.scss';
+
+.controls {
+  @include set-block-size(100%, auto);
+  @extend %flex-row-center-start;
+  gap: 10px;
+}
