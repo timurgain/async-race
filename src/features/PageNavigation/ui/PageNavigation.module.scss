@@ -3,26 +3,35 @@
 .nav {
   margin: auto 0;
   @include set-block-size(auto, auto);
+
+  @include max-1(md) {
+    order: 1;
+  }
+
   &__list {
     width: auto;
     @extend %flex-col-start-start;
-    row-gap: 20px;
+    gap: 20px;
+
+    @include max-1(md) {
+      flex-direction: row;
+    }
   }
 }
 
 .link {
-  display: block;
-  text-align: center;
+  @extend %flex-row-center-center;
+  @extend %transition-initial;
+  @include set-block-size(110px, 50px);
+  @include set-font-size(16px, 1.6, 600);
   text-decoration: none;
   color: $white-252;
-  @include set-block-size(100px, 45px);
   padding: 10px 15px;
   background: transparent;
   border-radius: 8px;
-  color: $purble-249;
-  border: 2px solid $purble-249;
+  color: $purple-249;
+  border: 3px solid $purple-249;
   cursor: pointer;
-  @extend %transition-initial;
 
   &:hover {
     @extend %transition-hover;
@@ -32,7 +41,7 @@
   }
 
   &_active {
-    color: $purple-153;
-    border: 2px solid $purple-153;
+    color: $red-255;
+    border: 3px solid $red-255;
   }
 }

@@ -14,7 +14,7 @@ export function PageNavigation({}: Props) {
             className={({ isActive }) => clsx(styles.link, { [styles.link_active]: isActive })}
             to={routes.garage}
           >
-            Garage
+            GARAGE
           </NavLink>
         </li>
         <li>
@@ -22,7 +22,7 @@ export function PageNavigation({}: Props) {
             className={({ isActive }) => clsx(styles.link, { [styles.link_active]: isActive })}
             to={routes.winners}
           >
-            Winners
+            WINNERS
           </NavLink>
         </li>
       </ul>

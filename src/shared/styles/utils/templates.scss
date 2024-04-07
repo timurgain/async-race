@@ -14,6 +14,20 @@
   justify-content: flex-start;
 }
 
+%flex-row-center-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+%flex-row-enter-start {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+
 // EFFECTS
 
 %transition-initial {
