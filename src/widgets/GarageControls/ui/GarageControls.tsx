@@ -1,15 +1,18 @@
-import { RaceCars } from '@/features/RaceCars';
 import styles from './GarageControls.module.scss';
-import { ResetCars } from '@/features/ResetCars';
+import { CarsRace } from '@/features/CarsRace';
+import { CarsReset } from '@/features/CarsReset';
+import { CarCreate } from '@/features/CarCreate';
+import { CarUpdate } from '@/features/CarUpdate';
 
-type Props = {}
+type Props = {};
 
 export function GarageControls({}: Props) {
   return (
     <section className={styles.controls}>
-      <RaceCars />
-      <ResetCars />
+      <CarsRace />
+      <CarsReset />
+      <CarCreate />
+      <CarUpdate />
     </section>
-  )
+  );
 }
-

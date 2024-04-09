@@ -20,8 +20,8 @@
 
   &_kit_primary-m-green,
   &_kit_primary-m-purple {
-    @include set-font-size(16px, 1.2, 600);
-    @include set-block-size(auto, auto);
+    @include set-font-size(18px, 1.2, 600);
+    @include set-block-size(auto, 40px);
     border-radius: 6px;
     padding: 6px 12px;
     gap: 10px;

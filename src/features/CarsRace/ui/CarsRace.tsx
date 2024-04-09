@@ -3,20 +3,19 @@ import PlayIcon from '@/shared/assets/icons/play.svg?react';
 
 type Props = {};
 
-export function RaceCars({}: Props) {
-
+export function CarsRace({}: Props) {
   // 0. Config
 
   // 1. Actions
 
-  function raceCars() {
-    console.log('raceCars');
+  function carsRace() {
+    console.log('CarsRace');
   }
-  
+
   // Render
 
   return (
-    <Button kit={ButtonKits.PRYMARY_M_GREEN} onClick={raceCars}>
+    <Button kit={ButtonKits.PRYMARY_M_GREEN} onClick={carsRace}>
       <span>RACE</span>
       <PlayIcon />
     </Button>

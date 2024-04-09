@@ -1,0 +1,18 @@
+@import '@/shared/styles/index.scss';
+
+.input {
+  background-color: $white-252;
+
+  &_kit_primary-m {
+    @include set-block-size(100%, 40px);
+    @include set-font-size(18px, 1.2, 600);
+    color: $purple-153;
+    padding: 0 10px;
+    border: none;
+    border-radius: 12px;
+
+    &::placeholder {
+      color: $purple-153_50;
+    }
+  }
+}
