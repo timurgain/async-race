@@ -8,14 +8,14 @@ export function CarsRace({}: Props) {
 
   // 1. Actions
 
-  function carsRace() {
+  function raceCars() {
     console.log('CarsRace');
   }
 
   // Render
 
   return (
-    <Button kit={ButtonKits.PRYMARY_M_GREEN} onClick={carsRace}>
+    <Button kit={ButtonKits.PRYMARY_M_GREEN} onClick={raceCars}>
       <span>RACE</span>
       <PlayIcon />
     </Button>

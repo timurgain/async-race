@@ -8,14 +8,14 @@ export function CarsReset({}: Props) {
 
   // 1. Actions
 
-  function carsReset() {
+  function resetCars() {
     console.log('CarsReset');
   }
 
   // Render
 
   return (
-    <Button kit={ButtonKits.PRYMARY_M_PURPLE} onClick={carsReset}>
+    <Button kit={ButtonKits.PRYMARY_M_PURPLE} onClick={resetCars}>
       <span>RESET</span>
       <ResetIcon />
     </Button>
