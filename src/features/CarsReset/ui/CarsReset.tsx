@@ -1,9 +1,11 @@
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 import ResetIcon from '@/shared/assets/icons/reset.svg?react';
 
-type Props = {};
+type Props = {
+  className?: string;
+};
 
-export function CarsReset({}: Props) {
+export function CarsReset({ className }: Props) {
   // 0. Config
 
   // 1. Actions
@@ -15,7 +17,7 @@ export function CarsReset({}: Props) {
   // Render
 
   return (
-    <Button kit={ButtonKits.PRYMARY_M_PURPLE} onClick={resetCars}>
+    <Button kit={ButtonKits.PRYMARY_M_PURPLE} onClick={resetCars} className={className}>
       <span>RESET</span>
       <ResetIcon />
     </Button>

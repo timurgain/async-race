@@ -10,11 +10,15 @@ type Props = {};
 export function GarageControls({}: Props) {
   return (
     <section className={styles.controls}>
-      <CarsRace />
-      <CarsReset />
-      <CarCreate />
-      <CarUpdate />
-      <CarsGenerate />
+      <div className={styles.play}>
+        <CarsRace />
+        <CarsReset />
+      </div>
+      <div className={styles.mutate}>
+        <CarCreate />
+        <CarUpdate />
+      </div>
+      <CarsGenerate className={styles.generate} />
     </section>
   );
 }
