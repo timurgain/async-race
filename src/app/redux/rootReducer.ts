@@ -1,6 +1,6 @@
-import { combineReducers } from "@reduxjs/toolkit";
-import { rootAPI } from "./rootAPI";
+import { combineReducers } from '@reduxjs/toolkit';
+import { backendAPI } from './api';
 
 export const rootReducer = combineReducers({
-  [rootAPI.reducerPath]: rootAPI.reducer,
+  [backendAPI.reducerPath]: backendAPI.reducer,
 });

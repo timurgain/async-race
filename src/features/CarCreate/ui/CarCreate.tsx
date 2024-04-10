@@ -5,6 +5,7 @@ import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 import { useForm } from 'react-hook-form';
 import { InputNames, FormData } from '../types/types';
 import { validationOptions } from '@/shared/utils/validationForm';
+import { carAPI } from '@/etities/Car';
 
 type Props = {
   className?: string;
@@ -12,6 +13,8 @@ type Props = {
 
 export function CarCreate({ className }: Props) {
   // 0. Config
+
+  const [postCar, {isError, isSuccess}] = carAPI.usePostCarMutation();
 
   const defaultFormValues = {
     [InputNames.NAME]: '',
@@ -29,8 +32,9 @@ export function CarCreate({ className }: Props) {
     defaultValues: defaultFormValues,
   });
 
-  function createCar(data: FormData) {
+  async function createCar(data: FormData) {
     console.log('CarCreate', data);
+    await postCar(data).unwrap();
     reset(defaultFormValues);
   }
 

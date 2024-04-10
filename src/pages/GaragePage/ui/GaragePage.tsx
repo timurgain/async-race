@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './GaragePage.module.scss';
 import { Header } from '@/widgets/Header';
 import { GarageControls } from '@/widgets/GarageControls';
-import { RacingTrack } from '@/widgets/RacingTrack';
+import { GarageCars } from '@/widgets/GarageCars';
 
 export default function GaragePage(): React.ReactNode {
   return (
@@ -10,7 +10,7 @@ export default function GaragePage(): React.ReactNode {
       <Header />
       <main className={styles.main}>
         <GarageControls />
-        <RacingTrack />
+        <GarageCars />
       </main>
     </>
   );
