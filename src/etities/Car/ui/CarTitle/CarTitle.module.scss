@@ -1,0 +1,11 @@
+@import '@/shared/styles/index.scss';
+
+.title {
+  @include set-font-size(46px, 1.6, 300);
+  // @extend %flex-row-center-start;
+  @extend %text-overflow-ellipsis;
+
+  @include max-1(md) {
+    @include set-font-size(28px, 1.6, 300);
+  }
+}

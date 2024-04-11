@@ -37,4 +37,36 @@
     color: $purple-249;
     border: 2px solid $purple-249;
   }
+
+  &_kit_primary-s-blue,
+  &_kit_primary-s-purple,
+  &_kit_primary-s-yellow,
+  &_kit_primary-s-green {
+    @include set-font-size(14px, 1.2, 600);
+    @include set-block-size(auto, 30px);
+    border-radius: 4px;
+    padding: 4px 8px;
+    gap: 6px;
+    background: transparent;
+  }
+
+  &_kit_primary-s-blue {
+    color: $blue-157;
+    border: 1px solid $blue-157;
+  }
+
+  &_kit_primary-s-purple {
+    color: $purple-249;
+    border: 1px solid $purple-249;
+  }
+
+  &_kit_primary-s-yellow {
+    color: $yellow-239;
+    border: 1px solid $yellow-239;
+  }
+
+  &_kit_primary-s-green {
+    color: $green-155;
+    border: 1px solid $green-155;
+  }
 }
