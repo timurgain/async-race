@@ -1,5 +1,5 @@
 import { backendAPI } from '@/app/redux/api';
-import { CarRequest, CarResponse } from '../types';
+import { CarRequest, CarResponse } from '../types/types';
 
 export const carAPI = backendAPI.injectEndpoints({
   endpoints: (build) => ({

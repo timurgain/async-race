@@ -15,7 +15,7 @@ export function GarageCars({}: Props) {
       {data?.map((car) => (
         <li key={car.id} className={styles.item}>
           <div className={styles.item__control}>
-            <CarSelect />
+            <CarSelect car={car}/>
             <EngineDrive />
             <CarRemove />
             <EngineStop />

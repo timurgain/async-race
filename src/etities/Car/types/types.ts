@@ -8,3 +8,7 @@ export type CarRequest = {
 export type CarResponse = CarRequest & {
   id: number;
 };
+
+export type InitialState = {
+  carSelected: CarResponse | null;
+};
