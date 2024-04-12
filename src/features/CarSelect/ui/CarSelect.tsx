@@ -1,16 +1,16 @@
 import { useDispatch } from '@/app/redux/hooks';
-import { CarResponse, carActions } from '@/etities/Car';
+import { CarID, carActions } from '@/etities/Car';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 
 type Props = {
-  car: CarResponse;
+  carID: CarID;
 };
 
-export function CarSelect({ car }: Props) {
+export function CarSelect({ carID }: Props) {
   const dispatch = useDispatch();
 
   function selectCar() {
-    dispatch(carActions.selectCar(car));
+    dispatch(carActions.selectCar(carID));
   }
 
   return (

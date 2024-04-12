@@ -1,28 +1,43 @@
-import { CarBody, CarTitle, carAPI } from '@/etities/Car';
+import { CarBody, CarTitle, carAPI, carActions, selectCar } from '@/etities/Car';
 import styles from './GarageCars.module.scss';
 import { CarSelect } from '@/features/CarSelect';
-import { CarRemove } from '@/features/CarRemove';
 import { EngineDrive } from '@/features/EngineDrive';
 import { EngineStop } from '@/features/EngineStop';
+import { useDispatch, useSelector } from '@/app/redux/hooks';
+import { useEffect } from 'react';
+import { CarDelete } from '@/features/CarDelete';
 
 type Props = {};
 
 export function GarageCars({}: Props) {
-  const { data } = carAPI.useGetCarsQuery();
+  // 0. Init
+
+  const dispatch = useDispatch();
+  const cars = useSelector(selectCar.cars);
+  const carIDs = useSelector(selectCar.carIDs);
+  const { data, isSuccess } = carAPI.useGetCarsQuery();
+
+  useEffect(() => {
+    if (isSuccess && !cars) dispatch(carActions.setCars(data));
+  }, [isSuccess, cars, data, dispatch]);
+
+  // 1. Render
+
+  if (!cars) return null;
 
   return (
     <ul className={styles.garage}>
-      {data?.map((car) => (
-        <li key={car.id} className={styles.item}>
+      {carIDs?.map((id) => (
+        <li key={id} className={styles.item}>
           <div className={styles.item__control}>
-            <CarSelect car={car}/>
-            <EngineDrive />
-            <CarRemove carID={car.id}/>
-            <EngineStop />
+            <CarSelect carID={id} />
+            <EngineDrive carID={id} />
+            <CarDelete carID={id} />
+            <EngineStop carID={id} />
           </div>
           <div className={styles.item__track}>
-            <CarBody color={car.color} />
-            <CarTitle color={car.color} title={car.name} />
+            <CarBody color={cars[id].color} />
+            <CarTitle color={cars[id].color} title={cars[id].name} />
           </div>
         </li>
       ))}

@@ -5,7 +5,6 @@ export const carAPI = backendAPI.injectEndpoints({
   endpoints: (build) => ({
     getCars: build.query<CarResponse[], void>({
       query: () => 'garage',
-      // providesTags: [{ type: 'Car', id: 'LIST' }],
       providesTags: (result) => (result ? result.map(({ id }) => ({ type: 'Car', id })) : ['Car']),
     }),
 
@@ -20,7 +19,7 @@ export const carAPI = backendAPI.injectEndpoints({
         method: 'POST',
         body: car,
       }),
-      invalidatesTags: [{ type: 'Car', id: 'LIST' }],
+      // invalidatesTags: [{ type: 'Car' }],
     }),
 
     updateCar: build.mutation<CarResponse, { id: CarID; data: CarRequest }>({
@@ -29,8 +28,7 @@ export const carAPI = backendAPI.injectEndpoints({
         method: 'PUT',
         body: data,
       }),
-      // invalidatesTags: [{ type: 'Car', id: 'LIST' }],
-      invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
+      // invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
     }),
 
     deleteCar: build.mutation<void, { id: CarID }>({
@@ -38,7 +36,7 @@ export const carAPI = backendAPI.injectEndpoints({
         url: `garage/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
+      // invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
     }),
   }),
 })

@@ -18,7 +18,7 @@ export function CarUpdate({ className }: Props) {
 
   const dispatch = useDispatch();
   const car = useSelector(selectCar.selected);
-  const [putCar,] = carAPI.useUpdateCarMutation();
+  const [putCar, { data, isSuccess }] = carAPI.useUpdateCarMutation();
 
   let defaultFormValues = {
     [InputNames.NAME]: car?.name || '',
@@ -49,8 +49,11 @@ export function CarUpdate({ className }: Props) {
     if (!car) return;
     putCar({ id: car?.id, data });
     dispatch(carActions.selectCar(null));
-    // reset(defaultFormValues);
   }
+
+  useEffect(() => {
+    if (isSuccess && data) dispatch(carActions.mutateCar(data));
+  }, [data, isSuccess, dispatch]);
 
   // Render
 

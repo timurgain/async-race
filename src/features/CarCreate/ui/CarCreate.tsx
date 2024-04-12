@@ -5,16 +5,19 @@ import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 import { useForm } from 'react-hook-form';
 import { InputNames } from '../types/types';
 import { validationOptions } from '@/shared/utils/validationForm';
-import { CarRequest, carAPI } from '@/etities/Car';
+import { CarRequest, carAPI, carActions } from '@/etities/Car';
+import { useEffect } from 'react';
+import { useDispatch } from '@/app/redux/hooks';
 
 type Props = {
   className?: string;
 };
 
 export function CarCreate({ className }: Props) {
-  // 0. Config
+  // 0. Init
 
-  const [postCar, {isError, isSuccess}] = carAPI.usePostCarMutation();
+  const dispatch = useDispatch();
+  const [postCar, {data, isSuccess}] = carAPI.usePostCarMutation();
 
   const defaultFormValues = {
     [InputNames.NAME]: '',
@@ -32,11 +35,17 @@ export function CarCreate({ className }: Props) {
     defaultValues: defaultFormValues,
   });
 
+  // 1. Create
+
   async function createCar(data: CarRequest) {
     console.log('CarCreate', data);
     await postCar(data).unwrap();
     reset(defaultFormValues);
   }
+
+  useEffect(() => {
+    if (isSuccess && data) dispatch(carActions.addCar(data));
+  }, [data, isSuccess, dispatch]);
 
   // Render
 
