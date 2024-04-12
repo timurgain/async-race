@@ -3,35 +3,53 @@ import clsx from 'clsx';
 import { Input, InputKits, InputTypes } from '@/shared/ui/Input/Input';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 import { useForm } from 'react-hook-form';
-import { InputNames, FormData } from '../types/types';
+import { InputNames } from '../types/types';
 import { validationOptions } from '@/shared/utils/validationForm';
+import { CarRequest, carAPI, carActions, selectCar } from '@/etities/Car';
+import { useDispatch, useSelector } from '@/app/redux/hooks';
+import { useEffect } from 'react';
 
 type Props = {
   className?: string;
 };
 
 export function CarUpdate({ className }: Props) {
-  // 0. Config
+  // 0. Init
 
-  const defaultFormValues = {
-    [InputNames.NAME]: '',
-    [InputNames.COLOR]: '#ffffff',
+  const dispatch = useDispatch();
+  const car = useSelector(selectCar.selected);
+  const [putCar,] = carAPI.useUpdateCarMutation();
+
+  let defaultFormValues = {
+    [InputNames.NAME]: car?.name || '',
+    [InputNames.COLOR]: car?.color || '#ffffff',
   };
 
   const {
     register,
     handleSubmit,
+    watch,
     reset,
     formState: { errors, isValid },
-  } = useForm<FormData>({
+  } = useForm<CarRequest>({
     mode: 'onChange',
     criteriaMode: 'all',
     defaultValues: defaultFormValues,
   });
 
-  function updateCar(data: FormData) {
-    console.log('updateCar', data);
+  const isChanged = watch(InputNames.NAME) !== car?.name || watch(InputNames.COLOR) !== car?.color;
+
+  // 1. Update
+
+  useEffect(() => {
     reset(defaultFormValues);
+  }, [car, reset]);
+
+  function updateCar(data: CarRequest) {
+    if (!car) return;
+    putCar({ id: car?.id, data });
+    dispatch(carActions.selectCar(null));
+    // reset(defaultFormValues);
   }
 
   // Render
@@ -40,7 +58,7 @@ export function CarUpdate({ className }: Props) {
     <form className={clsx(styles.form, className)} onSubmit={handleSubmit(updateCar)}>
       <Input
         kit={InputKits.PRINARY_M}
-        placeholder="TYPE CAR BRAND"
+        placeholder="SELECT CAR"
         type={InputTypes.TEXT}
         register={register}
         options={validationOptions.TEXT_REQUIRED}
@@ -54,7 +72,7 @@ export function CarUpdate({ className }: Props) {
         options={validationOptions.COLOR_REQUIRED}
         name={InputNames.COLOR}
       />
-      <Button kit={ButtonKits.PRYMARY_M_PURPLE} type="submit" disabled={!isValid}>
+      <Button kit={ButtonKits.PRYMARY_M_PURPLE} type="submit" disabled={!isChanged || !isValid}>
         UPDATE
       </Button>
     </form>

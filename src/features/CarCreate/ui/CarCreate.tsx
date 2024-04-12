@@ -3,9 +3,9 @@ import clsx from 'clsx';
 import { Input, InputKits, InputTypes } from '@/shared/ui/Input/Input';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 import { useForm } from 'react-hook-form';
-import { InputNames, FormData } from '../types/types';
+import { InputNames } from '../types/types';
 import { validationOptions } from '@/shared/utils/validationForm';
-import { carAPI } from '@/etities/Car';
+import { CarRequest, carAPI } from '@/etities/Car';
 
 type Props = {
   className?: string;
@@ -26,13 +26,13 @@ export function CarCreate({ className }: Props) {
     handleSubmit,
     reset,
     formState: { errors, isValid },
-  } = useForm<FormData>({
+  } = useForm<CarRequest>({
     mode: 'onChange',
     criteriaMode: 'all',
     defaultValues: defaultFormValues,
   });
 
-  async function createCar(data: FormData) {
+  async function createCar(data: CarRequest) {
     console.log('CarCreate', data);
     await postCar(data).unwrap();
     reset(defaultFormValues);
