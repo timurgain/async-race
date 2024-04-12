@@ -17,7 +17,7 @@ export function GarageCars({}: Props) {
           <div className={styles.item__control}>
             <CarSelect car={car}/>
             <EngineDrive />
-            <CarRemove />
+            <CarRemove carID={car.id}/>
             <EngineStop />
           </div>
           <div className={styles.item__track}>

@@ -32,5 +32,13 @@ export const carAPI = backendAPI.injectEndpoints({
       // invalidatesTags: [{ type: 'Car', id: 'LIST' }],
       invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
     }),
+
+    deleteCar: build.mutation<void, { id: CarID }>({
+      query: ({ id }) => ({
+        url: `garage/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
+    }),
   }),
-});
+})
