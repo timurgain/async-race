@@ -4,6 +4,7 @@
   width: 80px;
   min-width: 90px;
   @extend %flex-row-center-center;
+  transition: transform 0.3s ease-out;
 
   &__icon {
     transform: rotate(90deg);

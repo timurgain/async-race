@@ -10,7 +10,7 @@ export function Header({}: Props) {
     <header className={styles.header}>
       <PageNavigation />
       <div className={clsx(styles.header__shevrons, styles.header__shevrons_bottom)}></div>
-      <Signborder text="Async Racing" style={{ margin: '0 auto' }} />
+      <Signborder text="Async Race" style={{ margin: '0 auto' }} />
       <div className={clsx(styles.header__shevrons, styles.header__shevrons_top)}></div>
     </header>
   );

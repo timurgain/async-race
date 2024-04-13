@@ -4,7 +4,7 @@ import { CarSelect } from '@/features/CarSelect';
 import { EngineDrive } from '@/features/EngineDrive';
 import { EngineStop } from '@/features/EngineStop';
 import { useDispatch, useSelector } from '@/app/redux/hooks';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { CarDelete } from '@/features/CarDelete';
 
 type Props = {};
@@ -20,6 +20,11 @@ export function GarageCars({}: Props) {
   useEffect(() => {
     if (isSuccess && !cars) dispatch(carActions.setCars(data));
   }, [isSuccess, cars, data, dispatch]);
+
+  // 1. Track width
+
+  const trackRef = useRef<HTMLDivElement>(null);
+  const trackWidth = trackRef.current?.offsetWidth;
 
   // 1. Render
 
@@ -38,8 +43,8 @@ export function GarageCars({}: Props) {
               <CarDelete carID={id} />
               <EngineStop carID={id} />
             </div>
-            <div className={styles.item__track}>
-              <CarBody color={cars[id].color as string} />
+            <div className={styles.item__track} ref={trackRef}>
+              <CarBody car={cars[id]} trackWidth={trackWidth}/>
               <CarTitle color={cars[id].color as string} title={cars[id].name as string} />
             </div>
           </li>
