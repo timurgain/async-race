@@ -5,12 +5,26 @@ import { CarID } from '@/etities/Car';
 export const engineAPI = backendAPI.injectEndpoints({
   endpoints: (build) => ({
     
-    patchEngine: build.mutation<EngineResponse, { id: CarID; status: EngineStatus }>({
-      query: ({ id, status }) => ({
-        url: `engine?id=${id}&status=${status}`,
+    startEngine: build.mutation<EngineResponse, { id: CarID }>({
+      query: ({ id }) => ({
+        url: `engine?id=${id}&status=${EngineStatus.STARTED}`,
         method: 'PATCH',
       }),
       // invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
+    }),
+
+    driveEngine: build.mutation<EngineResponse, { id: CarID }>({
+      query: ({ id }) => ({
+        url: `engine?id=${id}&status=${EngineStatus.DRIVE}`,
+        method: 'PATCH',
+      }),
+    }),
+
+    stopEngine: build.mutation<EngineResponse, { id: CarID }>({
+      query: ({ id }) => ({
+        url: `engine?id=${id}&status=${EngineStatus.STOPPED}`,
+        method: 'PATCH',
+      }),
     }),
   }),
 });

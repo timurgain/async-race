@@ -27,20 +27,24 @@ export function GarageCars({}: Props) {
 
   return (
     <ul className={styles.garage}>
-      {carIDs?.map((id) => (
-        <li key={id} className={styles.item}>
-          <div className={styles.item__control}>
-            <CarSelect carID={id} />
-            <EngineDrive carID={id} />
-            <CarDelete carID={id} />
-            <EngineStop carID={id} />
-          </div>
-          <div className={styles.item__track}>
-            <CarBody color={cars[id].color} />
-            <CarTitle color={cars[id].color} title={cars[id].name} />
-          </div>
-        </li>
-      ))}
+      {carIDs?.map((id) => {
+        if (!cars[id]) return null;
+
+        return (
+          <li key={id} className={styles.item}>
+            <div className={styles.item__control}>
+              <CarSelect carID={id} />
+              <EngineDrive carID={id} />
+              <CarDelete carID={id} />
+              <EngineStop carID={id} />
+            </div>
+            <div className={styles.item__track}>
+              <CarBody color={cars[id].color as string} />
+              <CarTitle color={cars[id].color as string} title={cars[id].name as string} />
+            </div>
+          </li>
+        );
+      })}
     </ul>
   );
 }
