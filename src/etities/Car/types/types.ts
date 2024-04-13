@@ -1,5 +1,5 @@
 import { ColorHEXString } from '@/shared/types/types';
-import { EngineResponse } from '@/etities/Engine';
+import { EngineDriveMode, EngineResponse } from '@/etities/Engine';
 
 export type CarID = number;
 
@@ -12,7 +12,9 @@ export type CarResponse = CarRequest & {
   id: CarID;
 };
 
-export type CarEngineData = CarResponse & EngineResponse;
+export type CarEngineData = CarResponse & EngineResponse & {
+  drive?: EngineDriveMode | null;
+};
 
 export type InitialState = {
   carSelected: CarEngineData | null;

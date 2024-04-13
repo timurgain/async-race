@@ -30,11 +30,8 @@ const carSlice = createSlice({
       state.carIDs.push(action.payload.id);
     },
     mutateCar: (state, action: PayloadAction<CarEngineData>) => {
-      console.log('mutateCar', action.payload);
       if (state.cars) {
         const currentData = state.cars[action.payload.id];
-        console.log('mutateCar', currentData, action.payload);
-        
         state.cars[action.payload.id] = { ...currentData, ...action.payload };
       }
     },

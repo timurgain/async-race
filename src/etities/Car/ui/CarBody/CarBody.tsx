@@ -2,6 +2,9 @@ import styles from './CarBody.module.scss';
 import CarIcon from '@/shared/assets/icons/car.svg?react';
 import { CarEngineData } from '../../types/types';
 import { useEffect, useRef } from 'react';
+import { EngineDriveMode } from '@/etities/Engine';
+import { useDispatch } from '@/app/redux/hooks';
+import { carActions } from '../../model/slice';
 
 type Props = {
   car: CarEngineData;
@@ -12,6 +15,7 @@ export function CarBody({ car, trackWidth }: Props) {
   // 0. Init
 
   const carRef = useRef<HTMLDivElement>(null);
+  const dispatch = useDispatch();
   const distance = trackWidth - carRef.current?.offsetWidth!;
 
   // 1. Animation
@@ -33,7 +37,7 @@ export function CarBody({ car, trackWidth }: Props) {
   // 1.1 Start animation
   useEffect(() => {
     if (!car.velocity || !carRef.current) return;
-    if (car.success) {
+    if (car.drive === EngineDriveMode.DRIVE) {
       const startTime = performance.now();
       requestAnimationFrame((currentTime) => animateCar(currentTime, startTime));
     }
@@ -42,8 +46,11 @@ export function CarBody({ car, trackWidth }: Props) {
   // 1.2 Reset animation
   useEffect(() => {
     if (!carRef.current) return;
-    if (!car.success) carRef.current.style.transform = 'translateX(0)';
-  }, [car.success]);
+    if (car.drive === EngineDriveMode.RESET) {
+      carRef.current.style.transform = 'translateX(0)'
+      dispatch(carActions.mutateCar({ id: car.id, drive: null }));
+    };
+  }, [car]);
 
   // 2. Render
 

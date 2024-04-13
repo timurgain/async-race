@@ -9,3 +9,9 @@ export enum EngineStatus {
   STOPPED = 'stopped',
   DRIVE = 'drive',
 }
+
+export enum EngineDriveMode {
+  DRIVE = 'drive',
+  BROKEN = 'broken',
+  RESET = 'reset',
+}

@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from '@/app/redux/hooks';
 import { CarID, carActions, selectCar } from '@/etities/Car';
-import { engineAPI } from '@/etities/Engine';
+import { EngineDriveMode, engineAPI } from '@/etities/Engine';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 import { useEffect } from 'react';
 
@@ -13,7 +13,7 @@ export function EngineStop({ carID }: Props) {
 
   const dispatch = useDispatch();
   const car = useSelector(selectCar.car(carID));
-  const [stopEngine, { data, isSuccess }] = engineAPI.useStopEngineMutation();
+  const [stopEngine, { isSuccess: isEngineStopped, isLoading }] = engineAPI.useStopEngineMutation();
 
   // 1. Actions
 
@@ -22,10 +22,15 @@ export function EngineStop({ carID }: Props) {
   }
 
   useEffect(() => {
-    if (isSuccess && data) dispatch(carActions.mutateCar({ id: carID, success: false, ...data }));
-  }, [data, isSuccess]);
+    if (isEngineStopped)
+      dispatch(carActions.mutateCar({ id: carID, success: false, drive: EngineDriveMode.RESET }));
+  }, [isEngineStopped]);
 
   // 2. Render
 
-  return <Button kit={ButtonKits.PRYMARY_S_GREEN} onClick={stop} disabled={!car?.success}>B</Button>;
+  return (
+    <Button kit={ButtonKits.PRYMARY_S_GREEN} onClick={stop} disabled={!car?.drive || isLoading}>
+      B
+    </Button>
+  );
 }
