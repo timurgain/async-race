@@ -21,23 +21,27 @@ export function CarBody({ car, trackWidth }: Props) {
   // 1. Animation
 
   function animateCar(currentTime: number, startTime: number) {
-    const SLOWDOWN_RATIO = 10;
+    const SLOWDOWN_RATIO = 20;
     const elapsedTime = currentTime - startTime;
-    const requiredTime = car.velocity as number * SLOWDOWN_RATIO;
+    const requiredTime = (car.velocity as number) * SLOWDOWN_RATIO;
 
     const progress = Math.min(elapsedTime / requiredTime, 1);
+    const translateX = progress * distance;
+
     if (carRef.current) {
-      carRef.current.style.transform = `translateX(${progress * distance}px)`;
+      carRef.current.style.transform = `translateX(${translateX}px)`;
     }
     if (progress < 1) {
       requestAnimationFrame((currentTime) => animateCar(currentTime, startTime));
+    } else if (progress === 1) {
+      dispatch(carActions.mutateCar({ id: car.id, translateX }));
     }
-  };
+  }
 
   // 1.1 Start animation
   useEffect(() => {
     if (!car.velocity || !carRef.current) return;
-    if (car.drive === EngineDriveMode.DRIVE) {
+    if (car.drive === EngineDriveMode.DRIVE && !car.translateX) {
       const startTime = performance.now();
       requestAnimationFrame((currentTime) => animateCar(currentTime, startTime));
     }
@@ -47,15 +51,22 @@ export function CarBody({ car, trackWidth }: Props) {
   useEffect(() => {
     if (!carRef.current) return;
     if (car.drive === EngineDriveMode.RESET) {
-      carRef.current.style.transform = 'translateX(0)'
+      carRef.current.style.transform = 'translateX(0)';
       dispatch(carActions.mutateCar({ id: car.id, drive: null }));
-    };
+    }
   }, [car]);
 
   // 2. Render
 
   return (
-    <div className={styles.car} style={{ color: car.color }} ref={carRef}>
+    <div
+      className={styles.car}
+      style={{
+        color: car.color,
+        transform: car.translateX ? `translateX(${car.translateX}px)` : `translateX(0px)`,
+      }}
+      ref={carRef}
+    >
       <CarIcon className={styles.car__icon} />
     </div>
   );

@@ -21,7 +21,14 @@ export function useStopEngine({ carID }: Props) {
 
   useEffect(() => {
     if (isEngineStopped)
-      dispatch(carActions.mutateCar({ id: carID, success: false, drive: EngineDriveMode.RESET }));
+      dispatch(
+        carActions.mutateCar({
+          id: carID,
+          success: false,
+          translateX: null,
+          drive: EngineDriveMode.RESET,
+        })
+      );
   }, [isEngineStopped]);
 
   // Return

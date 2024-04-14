@@ -14,6 +14,7 @@ export type CarResponse = CarRequest & {
 
 export type CarEngineData = CarResponse & EngineResponse & {
   drive?: EngineDriveMode | null;
+  translateX?: number | null;
 };
 
 export type InitialState = {

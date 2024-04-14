@@ -6,7 +6,6 @@ import { EngineStop } from '@/features/EngineStop';
 import { useDispatch, useSelector } from '@/app/redux/hooks';
 import { useEffect, useRef } from 'react';
 import { CarDelete } from '@/features/CarDelete';
-import { EngineDriveMode } from '@/etities/Engine';
 
 type Props = {};
 
