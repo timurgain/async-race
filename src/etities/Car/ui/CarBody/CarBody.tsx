@@ -35,6 +35,8 @@ export function CarBody({ car, trackWidth }: Props) {
       requestAnimationFrame((currentTime) => animateCar(currentTime, startTime));
     } else if (progress === 1) {
       dispatch(carActions.mutateCar({ id: car.id, translateX }));
+      console.log('Car arrived', car.id, requiredTime);
+      
     }
   }
 

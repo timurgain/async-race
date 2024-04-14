@@ -1,21 +1,23 @@
 import { backendAPI } from '@/app/redux/api';
 import { CarID, CarRequest, CarResponse } from '../types/types';
 
+const GARAGE_URL = 'garage';
+
 export const carAPI = backendAPI.injectEndpoints({
   endpoints: (build) => ({
     getCars: build.query<CarResponse[], void>({
-      query: () => 'garage',
+      query: () => GARAGE_URL,
       providesTags: (result) => (result ? result.map(({ id }) => ({ type: 'Car', id })) : ['Car']),
     }),
 
     getCar: build.query<CarResponse, CarID>({
-      query: (id) => `garage/${id}`,
+      query: (id) => `${GARAGE_URL}/${id}`,
       providesTags: (_result, _error, id) => [{ type: 'Car', id }],
     }),
 
     postCar: build.mutation<CarResponse, CarRequest>({
       query: (car) => ({
-        url: 'garage',
+        url: GARAGE_URL,
         method: 'POST',
         body: car,
       }),
@@ -24,7 +26,7 @@ export const carAPI = backendAPI.injectEndpoints({
 
     updateCar: build.mutation<CarResponse, { id: CarID; data: CarRequest }>({
       query: ({ id, data }) => ({
-        url: `garage/${id}`,
+        url: `${GARAGE_URL}/${id}`,
         method: 'PUT',
         body: data,
       }),
@@ -33,7 +35,7 @@ export const carAPI = backendAPI.injectEndpoints({
 
     deleteCar: build.mutation<void, { id: CarID }>({
       query: ({ id }) => ({
-        url: `garage/${id}`,
+        url: `${GARAGE_URL}/${id}`,
         method: 'DELETE',
       }),
       // invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
