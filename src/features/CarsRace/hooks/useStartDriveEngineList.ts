@@ -16,6 +16,8 @@ export function useStartDriveEngineList({ carIDs }: Props) {
   const [startEngine] = engineAPI.useStartEngineMutation();
   const [driveEngine] = engineAPI.useDriveEngineMutation();
 
+  // 1. Actions
+
   const startDriveEngineList = useCallback(async () => {
     setIsLoading(true);
 
@@ -43,7 +45,6 @@ export function useStartDriveEngineList({ carIDs }: Props) {
     } catch (error) {
       console.error('useStartDriveEngineList error:', error);
     } finally {
-      console.log('useStartDriveEngineList done');
       setIsLoading(false);
     }
   }, [startEngine, driveEngine, carIDs]);
