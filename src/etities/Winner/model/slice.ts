@@ -3,7 +3,6 @@ import { InitialState, WinnerResponse, WinnerRequest } from '../types/types';
 
 const initialState: InitialState = {
   winners: null,
-  winnerIDs: null,
   currentWinner: null,
   isCurrentWinnerPosted: null,
   currentRaceStartTime: null,
@@ -16,12 +15,7 @@ const winnerSlice = createSlice({
   reducers: {
 
     setWinners: (state, action: PayloadAction<WinnerResponse[]>) => {
-      action.payload.forEach((winner) => {
-        if (!state.winners) state.winners = {};
-        if (!state.winnerIDs) state.winnerIDs = [];
-        state.winners[winner.id] = winner;
-        state.winnerIDs.push(winner.id);
-      });
+      state.winners = action.payload;
     },
 
     setCurrentRaceStartTime: (state, action: PayloadAction<number>) => {
@@ -41,12 +35,13 @@ const winnerSlice = createSlice({
       // if the winner is already defined, do nothing
       if (state.currentWinner?.time) return;
 
-      // set the winner if it is the first time
+      // set the first competitor as the winner
       const { id, carFinishTime } = action.payload;
       if (id && state.currentWinner === null && carFinishTime && state.currentRaceStartTime) {
-        const time = (carFinishTime - state.currentRaceStartTime) / 1000;
-        const wins = state.winners && state.winners[id] ? state.winners[id].wins++ : 1;
+        const time = (carFinishTime - state.currentRaceStartTime) / 1000;  // best time revised while post/put the winner in usePostPutWinner
+        const wins = 1;  // wins amount revised while post/put the winner in usePostPutWinner
         state.currentWinner = { id, wins, time};
+        state.isCurrentWinnerPosted = false;
       }
     },
 

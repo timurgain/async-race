@@ -13,10 +13,7 @@ export type WinnerResponse = {
 };
 
 export type InitialState = {
-  winners: {
-    [id: CarID]: WinnerResponse;
-  } | null;
-  winnerIDs: CarID[] | null;
+  winners: WinnerResponse[] | null;
   currentWinner: WinnerResponse | null;
   isCurrentWinnerPosted: boolean | null;
 
