@@ -1,8 +1,8 @@
-import { StateSchema } from "@/app/redux/store";
+import { StateSchema } from '@/app/redux/store';
 
 export const selectWinner = {
   winners: (state: StateSchema) => state.winner.winners,
-  currentRaceStart: (state: StateSchema) => state.winner.currentRaceStart,
-  currentRaceFirstFinish: (state: StateSchema) => state.winner.currentRaceFirstFinish,
+  currentRaceStartTime: (state: StateSchema) => state.winner.currentRaceStartTime,
+  currentRaceFirstFinishTime: (state: StateSchema) => state.winner.currentRaceFirstFinishTime,
   currentWinner: (state: StateSchema) => state.winner.currentWinner,
-}
+};

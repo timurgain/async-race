@@ -1,19 +1,28 @@
-import { CarID } from "@/etities/Car";
+import { CarID } from '@/etities/Car';
 
-export type Winner = {
+export type WinnerRequest = {
   id?: CarID;
+  wins?: number;
+  time?: number;
+};
+
+export type WinnerResponse = {
+  id: CarID;
   wins: number;
   time: number;
 };
 
 export type InitialState = {
-  winners: Winner[] | null;
-  currentWinner: Winner | null;
+  winners: {
+    [id: CarID]: WinnerResponse;
+  } | null;
+  winnerIDs: CarID[] | null;
+  currentWinner: WinnerResponse | null;
 
-  currentRaceStart: number | null;
-  currentRaceFirstFinish: number | null;
-}
- 
+  currentRaceStartTime: number | null;
+  currentRaceFirstFinishTime: number | null;
+};
+
 export enum WinnersParams {
   PAGE = '_page',
   LIMIT = '_limit',
@@ -31,4 +40,3 @@ export enum WinnersSort {
   WINS = 'wins',
   TIME = 'time',
 }
-

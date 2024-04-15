@@ -1,6 +1,7 @@
 import { useDispatch } from '@/app/redux/hooks';
 import { CarID, carActions } from '@/etities/Car';
 import { EngineDriveMode, engineAPI } from '@/etities/Engine';
+import { winnerActions } from '@/etities/Winner';
 import { useCallback, useState } from 'react';
 
 type Props = {
@@ -37,6 +38,9 @@ export function useStopEngineList({ carIDs }: Props) {
             )
         )
       );
+      
+      dispatch(winnerActions.mutateCurrentWinner(null))
+
     } catch (error) {
       console.error('useStopEngineList error:', error);
     } finally {

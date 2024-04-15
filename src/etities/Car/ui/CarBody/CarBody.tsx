@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 import { EngineDriveMode } from '@/etities/Engine';
 import { useDispatch } from '@/app/redux/hooks';
 import { carActions } from '../../model/slice';
+import { winnerActions } from '@/etities/Winner';
 
 type Props = {
   car: CarEngineData;
@@ -35,8 +36,8 @@ export function CarBody({ car, trackWidth }: Props) {
       requestAnimationFrame((currentTime) => animateCar(currentTime, startTime));
     } else if (progress === 1) {
       dispatch(carActions.mutateCar({ id: car.id, translateX }));
-      console.log('Car arrived', car.id, requiredTime);
-      
+      // handle winner
+      dispatch(winnerActions.mutateCurrentWinner({ id: car.id, carFinishTime: Date.now() }));
     }
   }
 
