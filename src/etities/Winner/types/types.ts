@@ -13,10 +13,8 @@ export type WinnerResponse = {
 };
 
 export type InitialState = {
-  winners: WinnerResponse[] | null;
   currentWinner: WinnerResponse | null;
   isCurrentWinnerPosted: boolean | null;
-
   currentRaceStartTime: number | null;
   currentRaceFirstFinishTime: number | null;
 };

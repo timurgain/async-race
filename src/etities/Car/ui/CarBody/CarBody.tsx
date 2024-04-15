@@ -10,9 +10,10 @@ import { winnerActions } from '@/etities/Winner';
 type Props = {
   car: CarEngineData;
   trackWidth: number;
+  isAnimated?: boolean;
 };
 
-export function CarBody({ car, trackWidth }: Props) {
+export function CarBody({ car, trackWidth, isAnimated = true }: Props) {
   // 0. Init
 
   const carRef = useRef<HTMLDivElement>(null);
@@ -22,6 +23,8 @@ export function CarBody({ car, trackWidth }: Props) {
   // 1. Animation
 
   function animateCar(currentTime: number, startTime: number) {
+    console.log('trackWidth', trackWidth);
+
     const SLOWDOWN_RATIO = 20;
     const elapsedTime = currentTime - startTime;
     const requiredTime = (car.velocity as number) * SLOWDOWN_RATIO;
@@ -61,16 +64,27 @@ export function CarBody({ car, trackWidth }: Props) {
 
   // 2. Render
 
-  return (
-    <div
-      className={styles.car}
-      style={{
-        color: car.color,
-        transform: car.translateX ? `translateX(${car.translateX}px)` : `translateX(0px)`,
-      }}
-      ref={carRef}
-    >
-      <CarIcon className={styles.car__icon} />
-    </div>
-  );
+  if (isAnimated)
+    return (
+      <div
+        className={styles.car}
+        style={{
+          color: car.color,
+          transform: car.translateX ? `translateX(${car.translateX}px)` : `translateX(0px)`,
+        }}
+        ref={carRef}
+      >
+        <CarIcon className={styles.car__icon} />
+      </div>
+    );
+
+  if (!isAnimated)
+    return (
+      <div
+        className={styles.car}
+        style={{ color: car.color }}
+      >
+        <CarIcon className={styles.car__icon} />
+      </div>
+    );
 }

@@ -1,26 +1,20 @@
-import { CarBody, CarTitle, carAPI, carActions, selectCar } from '@/etities/Car';
+import { CarBody, CarTitle, selectCar, useCarsFetch } from '@/etities/Car';
 import styles from './GarageCars.module.scss';
 import { CarSelect } from '@/features/CarSelect';
 import { EngineDrive } from '@/features/EngineDrive';
 import { EngineStop } from '@/features/EngineStop';
-import { useDispatch, useSelector } from '@/app/redux/hooks';
-import { useEffect, useRef } from 'react';
+import { useSelector } from '@/app/redux/hooks';
+import { useRef } from 'react';
 import { CarDelete } from '@/features/CarDelete';
 
 type Props = {};
 
 export function GarageCars({}: Props) {
   // 0. Init
-
-  const dispatch = useDispatch();
+  useCarsFetch();
+  const selectedID = useSelector(selectCar.selected)?.id;
   const cars = useSelector(selectCar.cars);
   const carIDs = useSelector(selectCar.carIDs);
-  const selectedID = useSelector(selectCar.selected)?.id;
-  const { data, isSuccess } = carAPI.useGetCarsQuery();
-
-  useEffect(() => {
-    if (isSuccess && !cars) dispatch(carActions.setCars(data));
-  }, [isSuccess, cars, data, dispatch]);
 
   // 1. Track width
 

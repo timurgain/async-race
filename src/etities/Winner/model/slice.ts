@@ -1,8 +1,7 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InitialState, WinnerResponse, WinnerRequest } from '../types/types';
+import { InitialState, WinnerRequest } from '../types/types';
 
 const initialState: InitialState = {
-  winners: null,
   currentWinner: null,
   isCurrentWinnerPosted: null,
   currentRaceStartTime: null,
@@ -13,11 +12,6 @@ const winnerSlice = createSlice({
   name: 'winner',
   initialState,
   reducers: {
-
-    setWinners: (state, action: PayloadAction<WinnerResponse[]>) => {
-      state.winners = action.payload;
-    },
-
     setCurrentRaceStartTime: (state, action: PayloadAction<number>) => {
       state.currentRaceStartTime = action.payload;
     },

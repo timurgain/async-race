@@ -1,24 +1,21 @@
 import clsx from 'clsx';
 import styles from './WinnersTable.module.scss';
-import { selectWinner, winnerAPI, winnerActions } from '@/etities/Winner';
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from '@/app/redux/hooks';
+import { winnerAPI } from '@/etities/Winner';
+import { CarBody, selectCar, useCarsFetch } from '@/etities/Car';
+import { useSelector } from '@/app/redux/hooks';
 
 type Props = {};
 
 export function WinnersTable({}: Props) {
   // 0. Init
-
-  const dispatch = useDispatch();
-  const winners = useSelector(selectWinner.winners);
-  const { data, isSuccess } = winnerAPI.useGetWinnersQuery();
-
-  useEffect(() => {
-    if (isSuccess && !winners) dispatch(winnerActions.setWinners(data));
-  }, [isSuccess, winners, data, dispatch]);
+  useCarsFetch();
+  const cars = useSelector(selectCar.cars);
+  const { data: winners } = winnerAPI.useGetWinnersQuery();
 
   // 1. Render
-  
+
+  if (!winners || !cars) return <p>Loading...</p>;
+
   return (
     <section className={styles.winners}>
       <div className={clsx(styles.winners__row, styles.winners__row_type_header)}>
@@ -29,10 +26,16 @@ export function WinnersTable({}: Props) {
         <p>BEST TIME, sec</p>
       </div>
 
-
-      <div className={styles.winners__row}>
-
-      </div>
+      {winners?.map((winner) => {
+        return (
+        <div key={winner.id} className={styles.winners__row}>
+          <p>{winner.id}</p>
+          <CarBody isAnimated={false} car={cars[winner.id]} trackWidth={0}/>
+          <p>{cars[winner.id]?.name}</p>
+          <p>{winner.wins}</p>
+          <p>{winner.time}</p>
+        </div>);
+      })}
     </section>
   );
 }
