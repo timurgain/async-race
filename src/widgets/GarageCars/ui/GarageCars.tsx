@@ -6,6 +6,7 @@ import { EngineStop } from '@/features/EngineStop';
 import { useDispatch, useSelector } from '@/app/redux/hooks';
 import { useEffect, useRef } from 'react';
 import { CarDelete } from '@/features/CarDelete';
+import { selectWinner, winnerAPI } from '@/etities/Winner';
 
 type Props = {};
 
@@ -18,11 +19,19 @@ export function GarageCars({}: Props) {
   const selectedID = useSelector(selectCar.selected)?.id;
   const { data, isSuccess } = carAPI.useGetCarsQuery();
 
+  const winner = useSelector(selectWinner.currentWinner);
+  const [postWinner] = winnerAPI.usePostWinnerMutation(); 
+
   useEffect(() => {
     if (isSuccess && !cars) dispatch(carActions.setCars(data));
   }, [isSuccess, cars, data, dispatch]);
 
-  // 1. Track width
+  // 1. Post winner
+  useEffect(() => {
+    if (winner) {postWinner(winner)}
+  }, [winner]);
+
+  // 2. Track width
 
   const trackRef = useRef<HTMLDivElement>(null);
   const trackWidth = trackRef.current?.offsetWidth;

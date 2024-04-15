@@ -4,24 +4,10 @@
   display: inline-flex;
   @include set-block-size(auto, auto);
   @include set-font-size(36px, 1.6, 600);
+  @extend %neon-border;
   color: $white-252;
   text-align: center;
   transform: rotate(-3deg);
-
-  border: 3px solid #fff;
-  border-radius: 16px;
-  padding: 30px 40px;
-  box-shadow:
-    0 0 3px $white-252,
-    0 0 3px $white-252,
-    0 0 32px $red-255,
-    0 0 12px $red-255,
-    0 0 45px $red-255,
-    inset 0 0 20px $red-255,
-    0 2px 0 4px $white-252,
-    0 4px 0 4px $white-252,
-    0 6px 0 4px $white-252,
-    0 8px 0 4px $white-252;
 
   &__text {
     text-wrap: nowrap;

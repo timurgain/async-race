@@ -3,6 +3,7 @@ import styles from './GaragePage.module.scss';
 import { Header } from '@/widgets/Header';
 import { GarageControls } from '@/widgets/GarageControls';
 import { GarageCars } from '@/widgets/GarageCars';
+import { WinnerModal } from '@/etities/Winner';
 
 export default function GaragePage(): React.ReactNode {
   return (
@@ -12,6 +13,7 @@ export default function GaragePage(): React.ReactNode {
         <GarageControls />
         <GarageCars />
       </main>
+      <WinnerModal />
     </>
   );
 }
