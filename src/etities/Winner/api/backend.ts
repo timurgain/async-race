@@ -30,7 +30,7 @@ export const winnerAPI = backendAPI.injectEndpoints({
       invalidatesTags: [{ type: 'Winner' }],
     }),
 
-    updateWinner: build.mutation<Winner, { id: CarID; data: Winner }>({
+    putWinner: build.mutation<Winner, { id: CarID; data: Winner }>({
       query: ({ id, data }) => ({
         url: `${WINNERS_URL}/${id}`,
         method: 'PUT',

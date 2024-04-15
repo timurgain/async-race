@@ -18,6 +18,7 @@ export type InitialState = {
   } | null;
   winnerIDs: CarID[] | null;
   currentWinner: WinnerResponse | null;
+  isCurrentWinnerPosted: boolean | null;
 
   currentRaceStartTime: number | null;
   currentRaceFirstFinishTime: number | null;

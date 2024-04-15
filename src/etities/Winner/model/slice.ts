@@ -5,6 +5,7 @@ const initialState: InitialState = {
   winners: null,
   winnerIDs: null,
   currentWinner: null,
+  isCurrentWinnerPosted: null,
   currentRaceStartTime: null,
   currentRaceFirstFinishTime: null,
 };
@@ -45,8 +46,12 @@ const winnerSlice = createSlice({
       if (id && state.currentWinner === null && carFinishTime && state.currentRaceStartTime) {
         const time = (carFinishTime - state.currentRaceStartTime) / 1000;
         const wins = state.winners && state.winners[id] ? state.winners[id].wins++ : 1;
-        state.currentWinner = { id, wins, time };
+        state.currentWinner = { id, wins, time};
       }
+    },
+
+    setIsCurrentWinnerPosted: (state, action: PayloadAction<boolean | null>) => {
+      state.isCurrentWinnerPosted = action.payload;
     },
   },
 });
