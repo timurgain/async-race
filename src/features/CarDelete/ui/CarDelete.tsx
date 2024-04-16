@@ -1,8 +1,7 @@
-import { useDispatch } from '@/app/redux/hooks';
-import { carAPI, carActions } from '@/etities/Car';
+import { carAPI } from '@/etities/Car';
 import { CarID } from '@/etities/Car/types/types';
+import { winnerAPI } from '@/etities/Winner';
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
-import { useEffect } from 'react';
 
 type Props = {
   carID: CarID;
@@ -10,16 +9,20 @@ type Props = {
 
 export function CarDelete({ carID }: Props) {
   // 0. Init
-  const dispatch = useDispatch();
-  const [deleteCar, {isSuccess}] = carAPI.useDeleteCarMutation();
+  const [deleteCar, {}] = carAPI.useDeleteCarMutation();
+  const [deleteWinner, {}] = winnerAPI.useDeleteWinnerMutation();
 
-  useEffect(() => {
-    if (isSuccess) dispatch(carActions.deleteCar(carID));
-  }, [isSuccess]);
+  // 1. Actions
+  function handleDeleteCar() {
+    deleteCar({ id: carID })
+      .unwrap()
+      .then(() => deleteWinner({ id: carID }))
+      .catch(console.log);
+  }
 
   // Render
   return (
-    <Button kit={ButtonKits.PRYMARY_S_PURPLE} onClick={() => deleteCar({ id: carID })}>
+    <Button kit={ButtonKits.PRYMARY_S_PURPLE} onClick={handleDeleteCar}>
       REMOVE
     </Button>
   );

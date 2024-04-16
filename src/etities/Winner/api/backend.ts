@@ -46,5 +46,13 @@ export const winnerAPI = backendAPI.injectEndpoints({
       }),
       invalidatesTags: (_result, _error, { id }) => [{ type: 'Winner', id }],
     }),
+
+    deleteWinner: build.mutation<void, { id: CarID }>({
+      query: ({ id }) => ({
+        url: `${WINNERS_URL}/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: (_result, _error, { id }) => [{ type: 'Winner', id }],
+    })
   }),
 });
