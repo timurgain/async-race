@@ -23,4 +23,15 @@ export type InitialState = {
     [id: CarID]: CarEngineData;
   } | null;
   carIDs: CarID[] | null;  // <-- use it for iteration and ordering
+  carsQueryParams: CarsQueryParams;
+};
+
+export enum CarsParams {
+  PAGE = '_page',
+  LIMIT = '_limit',
+}
+
+export type CarsQueryParams = {
+  [CarsParams.PAGE]: number | null;
+  [CarsParams.LIMIT]: number | null;
 };

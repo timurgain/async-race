@@ -10,5 +10,6 @@ export const selectCar = {
   isAnyInDrive: createSelector(
     (state: StateSchema) => state.car.cars,
     (cars) => cars ? Object.values(cars).some((car) => car.drive) : false
-  )
+  ),
+  carsQueryParams: (state: StateSchema) => state.car.carsQueryParams,
 }

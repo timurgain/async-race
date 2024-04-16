@@ -1,4 +1,4 @@
-import { CarBody, CarTitle, selectCar, useCarsFetch } from '@/etities/Car';
+import { CarBodyAnimated, CarTitle, selectCar, useGarageCarsFetch } from '@/etities/Car';
 import styles from './GarageCars.module.scss';
 import { CarSelect } from '@/features/CarSelect';
 import { EngineDrive } from '@/features/EngineDrive';
@@ -11,7 +11,7 @@ type Props = {};
 
 export function GarageCars({}: Props) {
   // 0. Init
-  useCarsFetch();
+  useGarageCarsFetch();
   const selectedID = useSelector(selectCar.selected)?.id;
   const cars = useSelector(selectCar.cars);
   const carIDs = useSelector(selectCar.carIDs);
@@ -33,13 +33,13 @@ export function GarageCars({}: Props) {
         return (
           <li key={id} className={styles.item}>
             <div className={styles.item__control}>
-              <CarSelect carID={id} isSelected={id === selectedID}/>
+              <CarSelect carID={id} isSelected={id === selectedID} />
               <EngineDrive carID={id} />
               <CarDelete carID={id} />
               <EngineStop carID={id} />
             </div>
             <div className={styles.item__track} ref={trackRef}>
-              <CarBody car={cars[id]} trackWidth={trackWidth as number} />
+              <CarBodyAnimated car={cars[id]} trackWidth={trackWidth as number} />
               <CarTitle
                 color={cars[id].color as string}
                 title={cars[id].name as string}

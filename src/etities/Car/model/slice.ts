@@ -1,10 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { CarEngineData, CarID, InitialState } from '../types/types';
+import { CarEngineData, CarID, CarsParams, CarsQueryParams, InitialState } from '../types/types';
 
 const initialState: InitialState = {
   carSelected: null,
   cars: null,
   carIDs: null,
+  carsQueryParams: {
+    [CarsParams.PAGE]: null,
+    [CarsParams.LIMIT]: 7,
+  },
 };
 
 const carSlice = createSlice({
@@ -12,6 +16,8 @@ const carSlice = createSlice({
   initialState,
   reducers: {
     setCars: (state, action: PayloadAction<CarEngineData[]>) => {
+      state.cars = {}
+      state.carIDs = []
       action.payload.forEach((car) => {
         if (!state.cars) state.cars = {};
         if (!state.carIDs) state.carIDs = [];
@@ -40,6 +46,9 @@ const carSlice = createSlice({
         delete state.cars[action.payload];
         state.carIDs = state.carIDs.filter((id) => id !== action.payload);
       }
+    },
+    mutateCarsQueryParams: (state, action: PayloadAction<Partial<CarsQueryParams>>) => {
+      state.carsQueryParams = { ...state.carsQueryParams, ...action.payload };
     },
   },
 });

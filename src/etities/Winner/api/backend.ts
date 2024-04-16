@@ -10,11 +10,12 @@ export const winnerAPI = backendAPI.injectEndpoints({
       WinnerResponse[],
       Partial<winnersQueryParams>
     >({
-      query: (params = {}) => ({
+      query: (params) => ({
         url: WINNERS_URL,
-        params: params,
+        params: Object.fromEntries(
+          Object.entries(params || {}).filter(([_, value]) => value !== null)
+        ),
       }),
-
       providesTags: (result) =>
         result ? result.map(({ id }) => ({ type: 'Winner', id })) : ['Winner'],
     }),

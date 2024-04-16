@@ -20,8 +20,6 @@ export type InitialState = {
   currentRaceFirstFinishTime: number | null;
 };
 
-
-
 export enum WinnersParams {
   PAGE = '_page',
   LIMIT = '_limit',

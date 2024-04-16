@@ -1,4 +1,4 @@
-import styles from './CarBody.module.scss';
+import styles from './CarBodyAnimated.module.scss';
 import CarIcon from '@/shared/assets/icons/car.svg?react';
 import { CarEngineData } from '../../types/types';
 import { useEffect, useRef } from 'react';
@@ -10,10 +10,9 @@ import { winnerActions } from '@/etities/Winner';
 type Props = {
   car: CarEngineData;
   trackWidth: number;
-  isAnimated?: boolean;
 };
 
-export function CarBody({ car, trackWidth, isAnimated = true }: Props) {
+export function CarBodyAnimated({ car, trackWidth }: Props) {
   // 0. Init
 
   const carRef = useRef<HTMLDivElement>(null);
@@ -64,27 +63,16 @@ export function CarBody({ car, trackWidth, isAnimated = true }: Props) {
 
   // 2. Render
 
-  if (isAnimated)
-    return (
-      <div
-        className={styles.car}
-        style={{
-          color: car.color,
-          transform: car.translateX ? `translateX(${car.translateX}px)` : `translateX(0px)`,
-        }}
-        ref={carRef}
-      >
-        <CarIcon className={styles.car__icon} />
-      </div>
-    );
-
-  if (!isAnimated)
-    return (
-      <div
-        className={styles.car}
-        style={{ color: car.color }}
-      >
-        <CarIcon className={styles.car__icon} />
-      </div>
-    );
+  return (
+    <div
+      className={styles.car}
+      style={{
+        color: car.color,
+        transform: car.translateX ? `translateX(${car.translateX}px)` : `translateX(0px)`,
+      }}
+      ref={carRef}
+    >
+      <CarIcon className={styles.car__icon} />
+    </div>
+  );
 }
