@@ -12,12 +12,13 @@ type Props = {};
 export function WinnerModal({}: Props) {
   // 0. Init
   const winner = useSelector(selectWinner.currentWinner);
+  const isWinnerPosted = useSelector(selectWinner.isCurrentWinnerPosted);
   const car = useSelector(selectCar.car(winner?.id));
   const [isOpen, setOpen] = useState(false);
 
   useEffect(() => {
-    if (winner) setOpen(true);
-    if (!winner) setOpen(false);
+    if (winner && !isWinnerPosted) setOpen(true);
+    if (!winner && isWinnerPosted) setOpen(false);
   }, [winner]);
 
   // 1. Post/Put winner
