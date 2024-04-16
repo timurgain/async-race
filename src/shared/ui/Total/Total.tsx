@@ -8,7 +8,8 @@ type Props = {
 export function Total({ entity, total }: Props) {
   return (
     <p className={styles.total}>
-      {entity}{total}
+      <span>{entity.toLocaleUpperCase()}: </span>
+      <span>{total}</span>
     </p>
   );
 }
