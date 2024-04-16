@@ -1,21 +1,15 @@
 import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 import PlayIcon from '@/shared/assets/icons/play.svg?react';
-import styles from './WinnersPagination.module.scss';
-import { useDispatch, useSelector } from '@/app/redux/hooks';
-import { WinnersParams, selectWinner, winnerAPI, winnerActions } from '@/etities/Winner';
+import styles from './Pagination.module.scss';
 
-type Props = {};
+type Props = {
+  currentPage: number;
+  limit: number;
+  totalCount: number;
+  scrollPage: (page: number) => void;
+};
 
-export function WinnersPagination({}: Props) {
-  // 0. Init
-  
-  const dispatch = useDispatch();
-  const params = useSelector(selectWinner.winnersQueryParams);
-  const { data } = winnerAPI.useGetWinnersQuery(params);
-  const currentPage = params[WinnersParams.PAGE];
-  const limit = params[WinnersParams.LIMIT];
-  const totalCount = data?.totalCount;
-
+export function Pagination({ currentPage, limit, totalCount, scrollPage }: Props) {
   // 1. Helpers
 
   function hasNextPage() {
@@ -31,15 +25,11 @@ export function WinnersPagination({}: Props) {
   // 2. Actions
   function handleNext() {
     if (!hasNextPage()) return;
-    dispatch(
-      winnerActions.mutateWinnersQueryParams({ [WinnersParams.PAGE]: (currentPage || 0) + 1 })
-    );
+    scrollPage(currentPage + 1);
   }
   function handlePrev() {
     if (!hasPrevPage()) return;
-    dispatch(
-      winnerActions.mutateWinnersQueryParams({ [WinnersParams.PAGE]: (currentPage || 0) - 1 })
-    );
+    scrollPage(currentPage - 1);
   }
 
   // 3. Render

@@ -8,7 +8,7 @@ const initialState: InitialState = {
   currentRaceFirstFinishTime: null,
   winnersQueryParams: {
     [WinnersParams.PAGE]: 1,
-    [WinnersParams.LIMIT]: 2,
+    [WinnersParams.LIMIT]: 10,
     [WinnersParams.SORT]: null,
     [WinnersParams.ORDER]: null,
   },

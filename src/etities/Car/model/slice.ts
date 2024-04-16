@@ -6,7 +6,7 @@ const initialState: InitialState = {
   cars: null,
   carIDs: null,
   carsQueryParams: {
-    [CarsParams.PAGE]: null,
+    [CarsParams.PAGE]: 1,
     [CarsParams.LIMIT]: 7,
   },
 };

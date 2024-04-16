@@ -6,14 +6,18 @@ const GARAGE_URL = 'garage';
 
 export const carAPI = backendAPI.injectEndpoints({
   endpoints: (build) => ({
-    getCars: build.query<CarResponse[], Partial<CarsQueryParams>>({
+    getCars: build.query<{ data: CarResponse[]; totalCount: number }, Partial<CarsQueryParams>>({
       query: (params) => ({
         url: GARAGE_URL,
         params: Object.fromEntries(
           Object.entries(params || {}).filter(([_, value]) => value !== null)
         ),
       }),
-      providesTags: (result) => (result ? result.map(({ id }) => ({ type: 'Car', id })) : ['Car']),
+      transformResponse: (response: CarResponse[], meta) => {
+        const totalCount = parseInt(meta?.response?.headers.get('X-Total-Count') || '0', 10);
+        return { data: response, totalCount };
+      },
+      providesTags: (result) => (result ? result.data.map(({ id }) => ({ type: 'Car', id })) : ['Car']),
     }),
 
     getCar: build.query<CarResponse, CarID>({
@@ -27,7 +31,7 @@ export const carAPI = backendAPI.injectEndpoints({
         method: 'POST',
         body: car,
       }),
-      // invalidatesTags: [{ type: 'Car' }],
+      invalidatesTags: [{ type: 'Car' }],
     }),
 
     updateCar: build.mutation<CarResponse, { id: CarID; data: CarRequest }>({
@@ -44,7 +48,7 @@ export const carAPI = backendAPI.injectEndpoints({
         url: `${GARAGE_URL}/${id}`,
         method: 'DELETE',
       }),
-      // invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
+      invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
     }),
   }),
 });
