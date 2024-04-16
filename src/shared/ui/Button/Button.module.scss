@@ -18,6 +18,14 @@
     cursor: not-allowed;
   }
 
+  &_kit_clear {
+    @include set-block-size(auto, auto);
+    background: transparent;
+    border: none;
+    padding: 6px 6px;
+    gap: 10px;
+  }
+
   &_kit_primary-m-green,
   &_kit_primary-m-purple {
     @include set-font-size(18px, 1.2, 600);

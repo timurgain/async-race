@@ -4,13 +4,13 @@ import { Button as AriaButton, PressEvent } from 'react-aria-components';
 import styles from './Button.module.scss';
 
 export enum ButtonKits {
+  CLEAR = 'clear',
   PRYMARY_M_GREEN = 'primary-m-green',
   PRYMARY_M_PURPLE = 'primary-m-purple',
   PRYMARY_S_BLUE = 'primary-s-blue',
   PRYMARY_S_PURPLE = 'primary-s-purple',
   PRYMARY_S_YELLOW = 'primary-s-yellow',
   PRYMARY_S_GREEN = 'primary-s-green',  
-
   TABLE_M_YELLOW = 'table-m-yellow',
 }
 

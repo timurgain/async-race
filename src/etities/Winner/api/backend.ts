@@ -7,7 +7,7 @@ const WINNERS_URL = 'winners';
 export const winnerAPI = backendAPI.injectEndpoints({
   endpoints: (build) => ({
     getWinners: build.query<
-      WinnerResponse[],
+      {data: WinnerResponse[]; totalCount: number},
       Partial<winnersQueryParams>
     >({
       query: (params) => ({
@@ -16,8 +16,12 @@ export const winnerAPI = backendAPI.injectEndpoints({
           Object.entries(params || {}).filter(([_, value]) => value !== null)
         ),
       }),
+      transformResponse: (response: WinnerResponse[], meta) => {
+        const totalCount = parseInt(meta?.response?.headers.get('X-Total-Count') || '0', 10);
+        return { data: response, totalCount };
+      },
       providesTags: (result) =>
-        result ? result.map(({ id }) => ({ type: 'Winner', id })) : ['Winner'],
+        result ? result.data.map(({ id }) => ({ type: 'Winner', id })) : ['Winner'],
     }),
 
     getWinner: build.query<WinnerResponse, CarID>({

@@ -1,0 +1,1 @@
+export { WinnersPagination } from './ui/WinnersPagination';

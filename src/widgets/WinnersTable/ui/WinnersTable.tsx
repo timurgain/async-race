@@ -11,8 +11,10 @@ export function WinnersTable({}: Props) {
   // 0. Init
 
   const params = useSelector(selectWinner.winnersQueryParams);
-  const { data: winners } = winnerAPI.useGetWinnersQuery(params);
+  const {data} = winnerAPI.useGetWinnersQuery(params);
 
+  const winners = data?.data;
+  
   // 1. Render
 
   if (!winners) return <p>Loading...</p>;
