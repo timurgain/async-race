@@ -13,11 +13,14 @@ export type WinnerResponse = {
 };
 
 export type InitialState = {
+  winnersQueryParams: winnersQueryParams;
   currentWinner: WinnerResponse | null;
   isCurrentWinnerPosted: boolean | null;
   currentRaceStartTime: number | null;
   currentRaceFirstFinishTime: number | null;
 };
+
+
 
 export enum WinnersParams {
   PAGE = '_page',
@@ -36,3 +39,10 @@ export enum WinnersSort {
   WINS = 'wins',
   TIME = 'time',
 }
+
+export type winnersQueryParams = {
+  [WinnersParams.PAGE]: number | null;
+  [WinnersParams.LIMIT]: number | null;
+  [WinnersParams.SORT]: WinnersSort | null;
+  [WinnersParams.ORDER]: WinnersOrder | null;
+};

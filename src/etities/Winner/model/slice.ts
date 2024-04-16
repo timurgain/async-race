@@ -1,11 +1,17 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { InitialState, WinnerRequest } from '../types/types';
+import { InitialState, WinnerRequest, WinnersParams, winnersQueryParams } from '../types/types';
 
 const initialState: InitialState = {
   currentWinner: null,
   isCurrentWinnerPosted: null,
   currentRaceStartTime: null,
   currentRaceFirstFinishTime: null,
+  winnersQueryParams: {
+    [WinnersParams.PAGE]: null,
+    [WinnersParams.LIMIT]: 10,
+    [WinnersParams.SORT]: null,
+    [WinnersParams.ORDER]: null,
+  },
 };
 
 const winnerSlice = createSlice({
@@ -32,15 +38,19 @@ const winnerSlice = createSlice({
       // set the first competitor as the winner
       const { id, carFinishTime } = action.payload;
       if (id && state.currentWinner === null && carFinishTime && state.currentRaceStartTime) {
-        const time = (carFinishTime - state.currentRaceStartTime) / 1000;  // best time revised while post/put the winner in usePostPutWinner
-        const wins = 1;  // wins amount revised while post/put the winner in usePostPutWinner
-        state.currentWinner = { id, wins, time};
+        const time = (carFinishTime - state.currentRaceStartTime) / 1000; // best time revised while post/put the winner in usePostPutWinner
+        const wins = 1; // wins amount revised while post/put the winner in usePostPutWinner
+        state.currentWinner = { id, wins, time };
         state.isCurrentWinnerPosted = false;
       }
     },
 
     setIsCurrentWinnerPosted: (state, action: PayloadAction<boolean | null>) => {
       state.isCurrentWinnerPosted = action.payload;
+    },
+
+    mutateWinnersQueryParams: (state, action: PayloadAction<Partial<winnersQueryParams>>) => {
+      state.winnersQueryParams = { ...state.winnersQueryParams, ...action.payload };
     },
   },
 });

@@ -1,21 +1,20 @@
-import { WinnerRequest, WinnerResponse } from './../types/types';
+import { WinnerRequest, WinnerResponse, winnersQueryParams } from './../types/types';
 import { backendAPI } from '@/app/redux/api';
-import { WinnersParams as P, WinnersOrder, WinnersSort } from '../types/types';
 import { CarID } from '@/etities/Car';
 
 const WINNERS_URL = 'winners';
 
 export const winnerAPI = backendAPI.injectEndpoints({
   endpoints: (build) => ({
-    // getWinners: build.query<Winner[], { page?: number; limit?: number; sort?: WinnersSort; order?: WinnersOrder }>({
-    //   query: ({ page, limit, sort, order }) =>
-    //     `${WINNERS_URL}?${P.PAGE}=${page}&${P.LIMIT}=${limit}&${P.SORT}=${sort}&${P.ORDER}=${order}`,
-    //   providesTags: (result) =>
-    //     result ? result.map(({ id }) => ({ type: 'Winner', id })) : ['Winner'],
-    // }),
+    getWinners: build.query<
+      WinnerResponse[],
+      Partial<winnersQueryParams>
+    >({
+      query: (params = {}) => ({
+        url: WINNERS_URL,
+        params: params,
+      }),
 
-    getWinners: build.query<WinnerResponse[], void>({
-      query: () => `${WINNERS_URL}`,
       providesTags: (result) =>
         result ? result.map(({ id }) => ({ type: 'Winner', id })) : ['Winner'],
     }),

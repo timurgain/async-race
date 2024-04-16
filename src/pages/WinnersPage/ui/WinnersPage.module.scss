@@ -2,7 +2,7 @@
 
 .main {
   @extend %bp-width;
-  @extend %flex-col-start-center;
+  @extend %flex-col-start-start;
   gap: 25px;
   padding: 50px 0;
   overflow-x: scroll;

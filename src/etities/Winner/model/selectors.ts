@@ -6,4 +6,6 @@ export const selectWinner = {
   
   currentRaceStartTime: (state: StateSchema) => state.winner.currentRaceStartTime,
   currentRaceFirstFinishTime: (state: StateSchema) => state.winner.currentRaceFirstFinishTime,
+
+  winnersQueryParams: (state: StateSchema) => state.winner.winnersQueryParams,
 };

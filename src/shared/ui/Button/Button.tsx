@@ -10,6 +10,8 @@ export enum ButtonKits {
   PRYMARY_S_PURPLE = 'primary-s-purple',
   PRYMARY_S_YELLOW = 'primary-s-yellow',
   PRYMARY_S_GREEN = 'primary-s-green',  
+
+  TABLE_M_YELLOW = 'table-m-yellow',
 }
 
 type ButtonProps = {
