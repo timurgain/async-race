@@ -48,8 +48,8 @@ export const carAPI = backendAPI.injectEndpoints({
         url: `${GARAGE_URL}/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: [{ type: 'Car' }],
-      // invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
+      // invalidatesTags: [{ type: 'Car' }],
+      invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
     }),
   }),
 });

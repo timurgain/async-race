@@ -28,8 +28,7 @@ export function GarageBottomControls({}: Props) {
   useEffect(() => {
     if (isLoading || !isSuccess) return;
     if (!carsServer || !carClientIDs) return;
-    // if (carsServer.every((car) => carClientIDs.includes(car.id))) return;
-    if (carsServer.every(car => car.id in carClient)) return;
+    if (carClientIDs.length === carsServer.length && carsServer.every(car => car.id in carClient)) return;
     dispatch(carActions.setCars(carsServer as CarResponse[]));
     dispatch(winnerActions.mutateCurrentWinner(null));
   }, [isLoading, carsServer, dispatch]);
