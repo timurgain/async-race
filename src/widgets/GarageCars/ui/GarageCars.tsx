@@ -1,27 +1,39 @@
-import { CarBodyAnimated, CarTitle, selectCar, useGarageCarsFetch } from '@/etities/Car';
+import { CarBodyAnimated, CarResponse, CarTitle, carAPI, carActions, selectCar, useGarageCarsFetch } from '@/etities/Car';
 import styles from './GarageCars.module.scss';
 import { CarSelect } from '@/features/CarSelect';
 import { EngineDrive } from '@/features/EngineDrive';
 import { EngineStop } from '@/features/EngineStop';
-import { useSelector } from '@/app/redux/hooks';
-import { useRef } from 'react';
+import { useDispatch, useSelector } from '@/app/redux/hooks';
+import { useEffect, useRef } from 'react';
 import { CarDelete } from '@/features/CarDelete';
 
 type Props = {};
 
 export function GarageCars({}: Props) {
+
   // 0. Init
-  useGarageCarsFetch();
-  const selectedID = useSelector(selectCar.selected)?.id;
+
+  const dispatch = useDispatch();
   const cars = useSelector(selectCar.cars);
   const carIDs = useSelector(selectCar.carIDs);
+  const selectedID = useSelector(selectCar.selected)?.id;
 
-  // 1. Track width
+  const carsQueryParams = useSelector(selectCar.carsQueryParams);
+  const { data, isSuccess } = carAPI.useGetCarsQuery(carsQueryParams);
+  const carsServer = data?.data;
+
+  // 1. Fetch and set cars only if there are no cars
+  useEffect(() => {
+    if (!isSuccess || cars) return;
+    dispatch(carActions.setCars(carsServer as CarResponse[]));
+  }, [isSuccess, cars, dispatch]);
+  
+  // 2. Track width
 
   const trackRef = useRef<HTMLDivElement>(null);
   const trackWidth = trackRef.current?.offsetWidth;
 
-  // 2. Render
+  // 3. Render
 
   if (!cars) return null;
 
