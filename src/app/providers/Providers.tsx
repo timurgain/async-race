@@ -9,7 +9,7 @@ type Props = {
 
 export default function Providers({ children }: Props) {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.NODE_ENV === 'production' ? '/async-race/' : '/'}>
       <StoreProvider store={store}>{children}</StoreProvider>
     </BrowserRouter>
   );

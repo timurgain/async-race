@@ -13,8 +13,8 @@ export default defineConfig({
     },
   },
   plugins: [react(), ViteCSSExportPlugin(), svgr()],
-  // github pages deployment, repo name
-  // base: process.env.NODE_ENV === 'production' ? '/async-race/' : '/'
-  // base: '/'
 
+  // github pages deployment, repo name
+  // set the same base in BrowserRouter basename prop
+  base: process.env.NODE_ENV === 'production' ? '/async-race/' : '/',
 });
