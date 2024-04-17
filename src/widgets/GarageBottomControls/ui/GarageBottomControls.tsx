@@ -17,6 +17,7 @@ export function GarageBottomControls({}: Props) {
   const { data, isSuccess, isLoading } = carAPI.useGetCarsQuery(params);
   const carsServer = data?.data;
   const carClientIDs = useSelector(selectCar.carIDs);
+  const carClient = useSelector(selectCar.cars) || {};
   const currentPage = params[CarsParams.PAGE];
   const limit = params[CarsParams.LIMIT];
   const totalCount = data?.totalCount;
@@ -27,7 +28,8 @@ export function GarageBottomControls({}: Props) {
   useEffect(() => {
     if (isLoading || !isSuccess) return;
     if (!carsServer || !carClientIDs) return;
-    if (carsServer.every((car) => carClientIDs.includes(car.id))) return;
+    // if (carsServer.every((car) => carClientIDs.includes(car.id))) return;
+    if (carsServer.every(car => car.id in carClient)) return;
     dispatch(carActions.setCars(carsServer as CarResponse[]));
     dispatch(winnerActions.mutateCurrentWinner(null));
   }, [isLoading, carsServer, dispatch]);
