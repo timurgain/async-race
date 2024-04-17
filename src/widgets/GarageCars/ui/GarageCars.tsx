@@ -1,4 +1,4 @@
-import { CarBodyAnimated, CarResponse, CarTitle, carAPI, carActions, selectCar, useGarageCarsFetch } from '@/etities/Car';
+import { CarBodyAnimated, CarResponse, CarTitle, carAPI, carActions, selectCar } from '@/etities/Car';
 import styles from './GarageCars.module.scss';
 import { CarSelect } from '@/features/CarSelect';
 import { EngineDrive } from '@/features/EngineDrive';
