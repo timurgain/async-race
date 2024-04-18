@@ -1,7 +1,7 @@
 import styles from './CarBodyAnimated.module.scss';
 import CarIcon from '@/shared/assets/icons/car.svg?react';
 import { CarEngineData } from '../../types/types';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { EngineDriveMode } from '@/etities/Engine';
 import { useDispatch } from '@/app/redux/hooks';
 import { carActions } from '../../model/slice';
