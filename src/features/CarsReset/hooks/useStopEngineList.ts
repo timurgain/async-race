@@ -31,7 +31,7 @@ export function useStopEngineList({ carIDs }: Props) {
                 carActions.mutateCar({
                   id,
                   success: false,
-                  translateX: null,
+                  // translateX: null,
                   drive: EngineDriveMode.RESET,
                 })
               )

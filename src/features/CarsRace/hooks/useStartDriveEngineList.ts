@@ -37,14 +37,17 @@ export function useStartDriveEngineList({ carIDs }: Props) {
       // memorize start time
       dispatch(winnerActions.setCurrentRaceStartTime(Date.now()));
 
+      // start engines to drive and for animation
+      carIDs.forEach((id) => dispatch(carActions.mutateCar({ id, drive: EngineDriveMode.DRIVE })))
+
       // start engines to drive
       await Promise.all(
         carIDs.map((id) =>
           driveEngine({ id })
             .unwrap()
-            .then((data) => {
-              dispatch(carActions.mutateCar({ id, ...data, drive: EngineDriveMode.DRIVE }));
-            })
+            // .then((data) => {
+            //   dispatch(carActions.mutateCar({ id, ...data, drive: EngineDriveMode.DRIVE }));
+            // })
             .catch(() => dispatch(carActions.mutateCar({ id, drive: EngineDriveMode.BROKEN })))
         )
       );
