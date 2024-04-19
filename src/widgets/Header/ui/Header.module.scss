@@ -12,12 +12,11 @@
   }
 
   &__shevrons {
-    @include set-block-size(100%, 40px);
+    @include set-block-size(100%, 50px);
     background-image: url('@/shared/assets/icons/chevrons-red-255.svg');
     background-position: 0 0;
     background-repeat: repeat;
-    // background-size: calc(100% / 5) auto;
-    background-size: 40px auto;
+    background-size: auto 75px;
 
     &_bottom {
       margin: auto 0 0;
