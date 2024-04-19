@@ -6,9 +6,10 @@ import { useStopEngine } from '../hooks/useStopEngine';
 
 type Props = {
   carID: CarID;
+  className?: string;
 };
 
-export function EngineStop({ carID }: Props) {
+export function EngineStop({ carID, className }: Props) {
   
   // 0. Init
 
@@ -22,6 +23,7 @@ export function EngineStop({ carID }: Props) {
       kit={ButtonKits.PRYMARY_S_GREEN}
       onClick={stopEngine}
       disabled={!car?.drive || isLoading}
+      className={className}
     >
       <ResetIcon />
     </Button>

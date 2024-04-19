@@ -5,9 +5,10 @@ import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 
 type Props = {
   carID: CarID;
+  className?: string;
 };
 
-export function CarDelete({ carID }: Props) {
+export function CarDelete({ carID, className }: Props) {
   // 0. Init
   const [deleteCar, {}] = carAPI.useDeleteCarMutation();
   const [deleteWinner, {}] = winnerAPI.useDeleteWinnerMutation();
@@ -22,7 +23,7 @@ export function CarDelete({ carID }: Props) {
 
   // Render
   return (
-    <Button kit={ButtonKits.PRYMARY_S_PURPLE} onClick={handleDeleteCar}>
+    <Button kit={ButtonKits.PRYMARY_S_PURPLE} onClick={handleDeleteCar} className={className}>
       REMOVE
     </Button>
   );

@@ -44,11 +44,11 @@ export function GarageCars({}: Props) {
 
         return (
           <li key={id} className={styles.item}>
-            <div className={styles.item__control}>
-              <CarSelect carID={id} isSelected={id === selectedID} />
-              <EngineDrive carID={id} />
-              <CarDelete carID={id} />
-              <EngineStop carID={id} />
+            <div className={styles.item__controls}>
+              <CarSelect carID={id} isSelected={id === selectedID} className={styles.item__select} />
+              <EngineDrive carID={id} className={styles.item__drive} />
+              <CarDelete carID={id} className={styles.item__delete} />
+              <EngineStop carID={id} className={styles.item__stop} />
             </div>
             <div className={styles.item__track} ref={trackRef}>
               <CarBodyAnimated car={cars[id]} trackWidth={trackWidth as number} />

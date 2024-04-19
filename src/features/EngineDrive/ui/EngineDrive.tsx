@@ -7,9 +7,10 @@ import PlayIcon from '@/shared/assets/icons/play.svg?react';
 
 type Props = {
   carID: CarID;
+  className?: string;
 };
 
-export function EngineDrive({ carID }: Props) {
+export function EngineDrive({ carID, className }: Props) {
   // 0. Init
 
   const car = useSelector(selectCar.car(carID));
@@ -22,6 +23,7 @@ export function EngineDrive({ carID }: Props) {
       kit={ButtonKits.PRYMARY_S_YELLOW}
       onClick={startDriveEngine}
       disabled={!!car?.drive || isLoading}
+      className={className}
     >
       <PlayIcon/>
     </Button>

@@ -5,9 +5,10 @@ import { Button, ButtonKits } from '@/shared/ui/Button/Button';
 type Props = {
   carID: CarID;
   isSelected: boolean;
+  className?: string;
 };
 
-export function CarSelect({ carID, isSelected }: Props) {
+export function CarSelect({ carID, isSelected, className }: Props) {
   const dispatch = useDispatch();
 
   function selectCar() {
@@ -15,7 +16,12 @@ export function CarSelect({ carID, isSelected }: Props) {
   }
 
   return (
-    <Button kit={ButtonKits.PRYMARY_S_BLUE} onClick={selectCar} disabled={isSelected}>
+    <Button
+      kit={ButtonKits.PRYMARY_S_BLUE}
+      onClick={selectCar}
+      disabled={isSelected}
+      className={className}
+    >
       SELECT
     </Button>
   );

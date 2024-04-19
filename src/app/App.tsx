@@ -12,8 +12,10 @@ export default function App(): React.ReactNode {
   // + 404 page
   // + car animation
   // + basic fallback component
-  // - car controls grid
+  // + car controls grid
   // - tag strings in rtk query
+  // - header__shevrons make higher
+  // - alone car drive before server response
   // - Modal if there is no connction to the server
   // - Jest tests
 
