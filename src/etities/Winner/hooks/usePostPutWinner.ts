@@ -10,6 +10,7 @@ export function usePostPutWinner() {
 
   const winner = useSelector(selectWinner.currentWinner);
   const isCurrentWinnerPosted = useSelector(selectWinner.isCurrentWinnerPosted);
+  const raceStartTime = useSelector(selectWinner.currentRaceStartTime);
 
   const dispatch = useDispatch();
 
@@ -23,7 +24,7 @@ export function usePostPutWinner() {
   // 1. Post/Put winner
 
   useEffect(() => {
-    if (!winner || isCurrentWinnerPosted || wonBeforeFetching ) return;
+    if (!winner || !raceStartTime || isCurrentWinnerPosted || wonBeforeFetching ) return;
     setIsLoading(true);
 
     if (wonBeforeSuccess) {

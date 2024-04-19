@@ -10,7 +10,6 @@ export const engineAPI = backendAPI.injectEndpoints({
         url: `engine?id=${id}&status=${EngineStatus.STARTED}`,
         method: 'PATCH',
       }),
-      // invalidatesTags: (_result, _error, { id }) => [{ type: 'Car', id }],
     }),
 
     driveEngine: build.mutation<EngineResponse, { id: CarID }>({

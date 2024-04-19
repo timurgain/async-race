@@ -1,5 +1,5 @@
 import { WinnerRequest, WinnerResponse, winnersQueryParams } from './../types/types';
-import { backendAPI } from '@/app/redux/api';
+import { API_TAGS, backendAPI } from '@/app/redux/api';
 import { CarID } from '@/etities/Car';
 
 const WINNERS_URL = 'winners';
@@ -7,7 +7,7 @@ const WINNERS_URL = 'winners';
 export const winnerAPI = backendAPI.injectEndpoints({
   endpoints: (build) => ({
     getWinners: build.query<
-      {data: WinnerResponse[]; totalCount: number},
+      { data: WinnerResponse[]; totalCount: number },
       Partial<winnersQueryParams>
     >({
       query: (params) => ({
@@ -21,12 +21,12 @@ export const winnerAPI = backendAPI.injectEndpoints({
         return { data: response, totalCount };
       },
       providesTags: (result) =>
-        result ? result.data.map(({ id }) => ({ type: 'Winner', id })) : ['Winner'],
+        result ? result.data.map(({ id }) => ({ type: API_TAGS.WINNER, id })) : [API_TAGS.WINNER],
     }),
 
     getWinner: build.query<WinnerResponse, CarID>({
       query: (id) => `${WINNERS_URL}/${id}`,
-      providesTags: (_result, _error, id) => [{ type: 'Winner', id }],
+      providesTags: (_result, _error, id) => [{ type: API_TAGS.WINNER, id }],
     }),
 
     postWinner: build.mutation<WinnerResponse, WinnerRequest>({
@@ -35,7 +35,7 @@ export const winnerAPI = backendAPI.injectEndpoints({
         method: 'POST',
         body: data,
       }),
-      invalidatesTags: [{ type: 'Winner' }],
+      invalidatesTags: [{ type: API_TAGS.WINNER }],
     }),
 
     putWinner: build.mutation<WinnerResponse, WinnerRequest>({
@@ -44,7 +44,7 @@ export const winnerAPI = backendAPI.injectEndpoints({
         method: 'PUT',
         body: data,
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: 'Winner', id }],
+      invalidatesTags: (_result, _error, { id }) => [{ type: API_TAGS.WINNER, id }],
     }),
 
     deleteWinner: build.mutation<void, { id: CarID }>({
@@ -52,7 +52,7 @@ export const winnerAPI = backendAPI.injectEndpoints({
         url: `${WINNERS_URL}/${id}`,
         method: 'DELETE',
       }),
-      invalidatesTags: (_result, _error, { id }) => [{ type: 'Winner', id }],
-    })
+      invalidatesTags: (_result, _error, { id }) => [{ type: API_TAGS.WINNER, id }],
+    }),
   }),
 });

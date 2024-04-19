@@ -18,7 +18,7 @@ const winnerSlice = createSlice({
   name: 'winner',
   initialState,
   reducers: {
-    setCurrentRaceStartTime: (state, action: PayloadAction<number>) => {
+    setCurrentRaceStartTime: (state, action: PayloadAction<number | null>) => {
       state.currentRaceStartTime = action.payload;
     },
 

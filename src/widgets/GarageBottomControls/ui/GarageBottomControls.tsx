@@ -31,6 +31,7 @@ export function GarageBottomControls({}: Props) {
     if (carClientIDs.length === carsServer.length && carsServer.every(car => car.id in carClient)) return;
     dispatch(carActions.setCars(carsServer as CarResponse[]));
     dispatch(winnerActions.mutateCurrentWinner(null));
+    dispatch(winnerActions.setCurrentRaceStartTime(null));
   }, [isLoading, carsServer, dispatch]);
 
   // 2. Render

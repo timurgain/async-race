@@ -13,13 +13,13 @@ export function useStopEngineList({ carIDs }: Props) {
 
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(false);
-
   const [stopEngine] = engineAPI.useStopEngineMutation();
 
   // 1. Actions
 
   const stopEngineList = useCallback(() => {
     setIsLoading(true);
+
     try {
       Promise.all(
         carIDs.map((id) =>
@@ -38,6 +38,7 @@ export function useStopEngineList({ carIDs }: Props) {
       );
       
       dispatch(winnerActions.mutateCurrentWinner(null))
+      dispatch(winnerActions.setCurrentRaceStartTime(null));
 
     } catch (error) {
       console.error('useStopEngineList error:', error);
