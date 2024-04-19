@@ -4,34 +4,27 @@ import GaragePage from '../pages/GaragePage';
 import WinnersPage from '../pages/WinnersPage';
 import routes from './routes';
 import { ErrorBoundary } from '@/widgets/ErrorBoundary';
+import { Fallback } from '@/shared/ui/Fallback/Fallback';
 
 export default function App(): React.ReactNode {
   // TODO:
   // + errorBoundary
   // + 404 page
-  // - car animation
+  // + car animation
+  // + basic fallback component
+  // - car controls grid
+  // - tag strings in rtk query
   // - Modal if there is no connction to the server
   // - Jest tests
 
   return (
-    <ErrorBoundary
-      fallback={(error) => (
-        <p style={{ color: 'yellow', fontSize: '36px', margin: 'auto' }}>
-          There is an error: {error?.message}
-        </p>
-      )}
-    >
-      <Suspense fallback={<div>Loading...</div>}>
-
+    <ErrorBoundary fallback={(error) => <Fallback text={error?.message || 'Undefined error'} />}>
+      <Suspense fallback={<Fallback text='Loading...' />}>
         <Routes>
           <Route path={routes.garage} element={<GaragePage />} />
           <Route path={routes.winners} element={<WinnersPage />} />
-          <Route
-            path="*"
-            element={<div style={{ color: 'yellow', fontSize: '36px', margin: 'auto' }}>404</div>}
-          />
+          <Route path="*" element={<Fallback text='404 | This page could not be found' />} />
         </Routes>
-        
       </Suspense>
     </ErrorBoundary>
   );
