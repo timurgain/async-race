@@ -27,8 +27,6 @@ export function useStopEngine({ carID }: Props) {
       dispatch(
         carActions.mutateCar({
           id: carID,
-          success: false,
-          // translateX: null,
           drive: EngineDriveMode.RESET,
         })
       );

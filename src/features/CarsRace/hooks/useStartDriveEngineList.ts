@@ -22,7 +22,6 @@ export function useStartDriveEngineList({ carIDs }: Props) {
   const startDriveEngineList = useCallback(async () => {
     setIsLoading(true);
 
-
     try {
       // wait for all engines specifications
       await Promise.all(
@@ -34,20 +33,17 @@ export function useStartDriveEngineList({ carIDs }: Props) {
         )
       );
 
-      // memorize start time
+      // memorize start time to calculate the winner
       dispatch(winnerActions.setCurrentRaceStartTime(Date.now()));
 
-      // start engines to drive and for animation
-      carIDs.forEach((id) => dispatch(carActions.mutateCar({ id, drive: EngineDriveMode.DRIVE })))
+      // start cars animation before server response on drive mode
+      carIDs.forEach((id) => dispatch(carActions.mutateCar({ id, drive: EngineDriveMode.DRIVE })));
 
-      // start engines to drive
+      // if server response error, set drive mode to broken
       await Promise.all(
         carIDs.map((id) =>
           driveEngine({ id })
             .unwrap()
-            // .then((data) => {
-            //   dispatch(carActions.mutateCar({ id, ...data, drive: EngineDriveMode.DRIVE }));
-            // })
             .catch(() => dispatch(carActions.mutateCar({ id, drive: EngineDriveMode.BROKEN })))
         )
       );
