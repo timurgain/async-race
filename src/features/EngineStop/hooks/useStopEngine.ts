@@ -1,8 +1,8 @@
-import { useDispatch, useSelector } from '@/app/redux/hooks';
+import { useDispatch } from '@/app/redux/hooks';
 import { CarID, carActions } from '@/etities/Car';
 import { EngineDriveMode, engineAPI } from '@/etities/Engine';
-import { selectWinner, winnerActions } from '@/etities/Winner';
-import { useCallback, useEffect, useState } from 'react';
+import { winnerActions } from '@/etities/Winner';
+import { useCallback, useState } from 'react';
 
 type Props = {
   carID: CarID;
