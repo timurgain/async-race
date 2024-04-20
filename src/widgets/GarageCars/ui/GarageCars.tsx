@@ -1,4 +1,11 @@
-import { CarBodyAnimated, CarResponse, CarTitle, carAPI, carActions, selectCar } from '@/etities/Car';
+import {
+  CarBodyAnimated,
+  CarResponse,
+  CarTitle,
+  carAPI,
+  carActions,
+  selectCar,
+} from '@/etities/Car';
 import styles from './GarageCars.module.scss';
 import { CarSelect } from '@/features/CarSelect';
 import { EngineDrive } from '@/features/EngineDrive';
@@ -10,7 +17,6 @@ import { CarDelete } from '@/features/CarDelete';
 type Props = {};
 
 export function GarageCars({}: Props) {
-
   // 0. Init
 
   const dispatch = useDispatch();
@@ -19,7 +25,7 @@ export function GarageCars({}: Props) {
   const selectedID = useSelector(selectCar.selected)?.id;
 
   const carsQueryParams = useSelector(selectCar.carsQueryParams);
-  const { data, isSuccess } = carAPI.useGetCarsQuery(carsQueryParams);
+  const { data, isSuccess, isError } = carAPI.useGetCarsQuery(carsQueryParams);
   const carsServer = data?.data;
 
   // 1. Fetch and set cars only if there are no cars
@@ -27,7 +33,14 @@ export function GarageCars({}: Props) {
     if (!isSuccess || cars) return;
     dispatch(carActions.setCars(carsServer as CarResponse[]));
   }, [isSuccess, cars, dispatch]);
-  
+
+  useEffect(() => {
+    if (isError)
+      throw new Error(
+        'Error while fetching cars | check if the mock server is running, see Readme.md.'
+      );
+  }, [isError]);
+
   // 2. Track width
 
   const trackRef = useRef<HTMLDivElement>(null);
@@ -45,7 +58,11 @@ export function GarageCars({}: Props) {
         return (
           <li key={id} className={styles.item}>
             <div className={styles.item__controls}>
-              <CarSelect carID={id} isSelected={id === selectedID} className={styles.item__select} />
+              <CarSelect
+                carID={id}
+                isSelected={id === selectedID}
+                className={styles.item__select}
+              />
               <EngineDrive carID={id} className={styles.item__drive} />
               <CarDelete carID={id} className={styles.item__delete} />
               <EngineStop carID={id} className={styles.item__stop} />

@@ -4,6 +4,7 @@ import { WinnersSort, selectWinner, winnerAPI } from '@/etities/Winner';
 import { CarBodyQuery, CarTitleQuery } from '@/etities/Car';
 import { useSelector } from '@/app/redux/hooks';
 import { WinnersSorting } from '@/features/WinnersSorting';
+import { useEffect } from 'react';
 
 type Props = {};
 
@@ -11,10 +12,16 @@ export function WinnersTable({}: Props) {
   // 0. Init
 
   const params = useSelector(selectWinner.winnersQueryParams);
-  const {data} = winnerAPI.useGetWinnersQuery(params);
-
+  const { data, isError } = winnerAPI.useGetWinnersQuery(params);
   const winners = data?.data;
-  
+
+  useEffect(() => {
+    if (isError)
+      throw new Error(
+        'Error while fetching winners | check if the mock server is running, see Readme.md.'
+      );
+  }, [isError]);
+
   // 1. Render
 
   if (!winners) return <p>Loading...</p>;
