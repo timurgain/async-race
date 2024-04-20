@@ -12,7 +12,7 @@ type Props = {
 export function Pagination({ currentPage, limit, totalCount, scrollPage }: Props) {
   // 1. Helpers
 
-  function hasNextPage() {
+  function hasNextPage() {    
     if (!totalCount || !limit || !currentPage) return false;
     return currentPage * limit < totalCount;
   }
@@ -23,16 +23,19 @@ export function Pagination({ currentPage, limit, totalCount, scrollPage }: Props
   }
 
   // 2. Actions
+
   function handleNext() {
     if (!hasNextPage()) return;
     scrollPage(currentPage + 1);
   }
+
   function handlePrev() {
     if (!hasPrevPage()) return;
     scrollPage(currentPage - 1);
   }
 
   // 3. Render
+
   return (
     <article className={styles.pagination}>
       <Button

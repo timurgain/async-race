@@ -66,6 +66,7 @@ export function CarBodyAnimated({ car, trackWidth }: Props) {
     if (!carRef.current) return;
     if (car.drive === EngineDriveMode.RESET) {
       carRef.current.style.transform = 'translateX(0)';
+      if (animationIdRef.current) cancelAnimationFrame(animationIdRef.current);
       dispatch(carActions.mutateCar({ id: car.id, drive: null, translateX: null}));
     }
   }, [car.drive]);
