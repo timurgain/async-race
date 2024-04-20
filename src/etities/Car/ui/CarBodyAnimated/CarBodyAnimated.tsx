@@ -15,10 +15,10 @@ type Props = {
 export function CarBodyAnimated({ car, trackWidth }: Props) {
   // 0. Init
 
+  const dispatch = useDispatch();
+
   const carRef = useRef<HTMLDivElement>(null);
   const animationIdRef = useRef<number | null>(null);
-
-  const dispatch = useDispatch();
   const distance = trackWidth - carRef.current?.offsetWidth!;
 
   // 1. Animation
@@ -39,7 +39,6 @@ export function CarBodyAnimated({ car, trackWidth }: Props) {
       animationIdRef.current = requestAnimationFrame((currentTime) => animateCar(currentTime, startTime));
     } else if (progress === 1) {
       dispatch(carActions.mutateCar({ id: car.id, translateX }));
-      // handle winner
       dispatch(winnerActions.mutateCurrentWinner({ id: car.id, carFinishTime: Date.now() }));
     }
   }

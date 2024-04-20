@@ -7,10 +7,6 @@ import { ErrorBoundary } from '@/widgets/ErrorBoundary';
 import { Fallback } from '@/shared/ui/Fallback/Fallback';
 
 export default function App(): React.ReactNode {
-  // TODO:
-  // - Modal if there is no connction to the server
-  // - Jest tests
-
   return (
     <ErrorBoundary fallback={(error) => <Fallback text={error?.message || 'Undefined error'} />}>
       <Suspense fallback={<Fallback text='Loading...' />}>
