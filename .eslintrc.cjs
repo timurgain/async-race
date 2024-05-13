@@ -1,10 +1,10 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2020: true, 'jest/globals': true },
   extends: ['airbnb', 'airbnb/hooks', 'plugin:prettier/recommended'],
   ignorePatterns: ['dist', 'node_modules', 'vit-env.d.ts', '.eslintrc.cjs', 'vite.config.ts'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', "plugin:react/jsx-runtime"],
+  plugins: ['react-refresh', 'plugin:react/jsx-runtime', 'jest'],
   settings: {
     'import/resolver': {
       typescript: {},
@@ -26,12 +26,18 @@ module.exports = {
     ],
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
-    'import/extensions': ['error', 'ignorePackages', {
-      js: 'never',
-      jsx: 'never',
-      ts: 'never',
-      tsx: 'never',
-    }],
-    'import/prefer-default-export': 'off',  // Otherwise, it will conflict with feature-sliced-design
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+      },
+    ],
+
+    'import/prefer-default-export': 'off', // Otherwise, it will conflict with feature-sliced-design
+    'jest/no-focused-tests': 'off',
   },
 };
