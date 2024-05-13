@@ -8,7 +8,7 @@ export enum InputTypes {
 }
 
 export enum InputKits {
-  PRINARY_M = 'primary-m',
+  PRIMARY_M = 'primary-m',
   COLOR_M = 'color-m',
 }
 

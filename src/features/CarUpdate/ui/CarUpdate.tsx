@@ -60,7 +60,7 @@ export function CarUpdate({ className }: Props) {
   return (
     <form className={clsx(styles.form, className)} onSubmit={handleSubmit(updateCar)}>
       <Input
-        kit={InputKits.PRINARY_M}
+        kit={InputKits.PRIMARY_M}
         placeholder="SELECT CAR"
         type={InputTypes.TEXT}
         register={register}

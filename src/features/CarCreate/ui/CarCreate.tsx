@@ -53,7 +53,7 @@ export function CarCreate({ className }: Props) {
 
       <form className={clsx(styles.form, className)} onSubmit={handleSubmit(createCar)}>
         <Input
-          kit={InputKits.PRINARY_M}
+          kit={InputKits.PRIMARY_M}
           placeholder="TYPE CAR BRAND"
           type={InputTypes.TEXT}
           register={register}
