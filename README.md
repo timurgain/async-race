@@ -10,8 +10,9 @@ The project is about drag-racing competition to discover which car is the fastes
 - React 18;
 - Redux Toolkit, RTK Query;
 - HTML5, SCSS, React-Aria;
+- Jest, testing-library;
 - Vite.js;
-- Feature-sliced-design
+- Feature-sliced-design;
 - ...
 
 ## Links

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import styles from './PageNavigation.module.scss';
-import routes from '@/app/routes';
+import routes from '@/app/constants/routes';
 import clsx from 'clsx';
 
 type Props = {};
