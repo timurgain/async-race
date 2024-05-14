@@ -7,20 +7,40 @@ The project is about drag-racing competition to discover which car is the fastes
 ## Technologies
 
 - TypeScript;
-- React 18;
-- Redux Toolkit, RTK Query;
-- HTML5, SCSS, React-Aria;
-- Jest, testing-library;
 - Vite.js;
+- React 18, React Router;
+- Redux Toolkit, RTK Query;
+- React-hook-form;
+- SCSS, React-Aria;
+- Jest, testing-library/react;
+- ESlint, Prettier;
+- Husky pre-commit;
 - Feature-sliced-design;
-- ...
 
-## Links
+## Installation and running
 
-[Demo SPA link](https://timurgain.github.io/async-race/)  
-[Mock json-server repo](https://github.com/timurgain/async-race-api)
+### Backend
 
-## Overall checklist score: 380 points
+```
+1. $ git clone https://github.com/timurgain/async-race-api.git
+2. $ cd async-race-api
+3. $ npm install
+4. $ npm start 
+```
+### Frontend
+Go to [Demo SPA](https://timurgain.github.io/async-race/) or install and run the frontend locally:
+
+```
+1. $ git clone https://github.com/timurgain/async-race.git
+2. $ cd async-race
+3. $ npm install
+4. $ npm run dev
+```  
+
+Use node 14.x or higher.
+
+
+## EPAM assessed: 380 points (100% completion)
 
 ## Checklist
 
