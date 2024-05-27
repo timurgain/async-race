@@ -1,11 +1,15 @@
 import { Button, ButtonKits } from './Button';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, logRoles } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
 
 describe('Button', () => {
   it('should render a button with children', () => {
     const children = <p>Click me</p>;
-    render(<Button kit={ButtonKits.CLEAR}>{children}</Button>);
+    const {baseElement} =  render(<Button kit={ButtonKits.CLEAR}>{children}</Button>);
+
+    logRoles(baseElement);
+    screen.logTestingPlaygroundURL();
+
     expect(screen.getByText('Click me')).toBeInTheDocument();
   });
 

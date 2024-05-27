@@ -15,7 +15,7 @@
     @include set-block-size(100%, 50px);
     background-image: url('@/shared/assets/icons/chevrons-red-255.svg');
     background-position: 0 0;
-    background-repeat: repeat;
+    background-repeat: space repeat;
     background-size: auto 75px;
 
     &_bottom {

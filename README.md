@@ -12,7 +12,7 @@ The project is about drag-racing competition to discover which car is the fastes
 - Redux Toolkit, RTK Query;
 - React-hook-form;
 - SCSS, React-Aria;
-- Jest, testing-library/react;
+- Jest, React Testing Library;
 - ESlint, Prettier;
 - Husky pre-commit;
 - Feature-sliced-design;

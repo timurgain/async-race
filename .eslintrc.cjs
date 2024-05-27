@@ -5,6 +5,13 @@ module.exports = {
   ignorePatterns: ['dist', 'node_modules', 'vit-env.d.ts', '.eslintrc.cjs', 'vite.config.ts'],
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'plugin:react/jsx-runtime', 'jest'],
+  overrides: [
+    {
+			// enable eslint-plugin-testing-library rules or preset only for matching testing files 
+			files: ['**/__tests__/**/*.[jt]s?(x)', '**/?(*.)+(spec|test).[jt]s?(x)'],
+			extends: ['plugin:testing-library/react'],
+		},
+  ],
   settings: {
     'import/resolver': {
       typescript: {},
@@ -39,5 +46,10 @@ module.exports = {
 
     'import/prefer-default-export': 'off', // Otherwise, it will conflict with feature-sliced-design
     'jest/no-focused-tests': 'off',
+
+    // 'testing-library/await-async-queries': 'error',
+    // 'testing-library/no-await-sync-queries': 'error',
+    // 'testing-library/no-debugging-utils': 'warn',
+    // 'testing-library/no-dom-import': 'off',
   },
 };
