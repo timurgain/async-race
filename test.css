@@ -1,0 +1,19 @@
+:root {
+  --bs-success: #FE7C00;
+
+  background-color: var(--bs-success) !important;
+}
+.text-success, .link-success {
+  color: var(--bs-success) !important;
+  transition: color 0.2s ease-in-out;
+}
+.border-success {
+  border-color: var(--bs-success) !important;
+}
+.btn-success:hover {
+  background-color: var(--bs-success-dark) !important;
+}
+.link-success:hover {
+  color: var(--bs-success-dark) !important;
+  transition: color 0.2s ease-in-out;
+}
